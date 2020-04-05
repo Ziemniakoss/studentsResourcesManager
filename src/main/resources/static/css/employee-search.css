@@ -1,0 +1,35 @@
+#search {
+	width: 80%;
+	margin: 0 auto;
+}
+
+tbody > tr > td.employee-search-result {
+	border: none;
+	text-align: left;
+	padding: 5px;
+	width: auto;
+	min-width: 80px;
+	background-color: #404040
+}
+
+table {
+	margin: 0 auto;
+	width: 80%;
+	border-spacing: 8px 5px;
+}
+
+
+thead > tr.employee-search-result {
+	background-color: #474747;
+}
+
+thead > tr > td.employee-search-result {
+	padding: 1px;
+	font-size: 20px;
+	min-width: 100px;
+	/*border: 2px solid white;*/
+	background: #414141;
+}
+
+
+

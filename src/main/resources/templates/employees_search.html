@@ -1,0 +1,37 @@
+<!DOCTYPE html >
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>Wyszukiwarka pracowników</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/employee-search.css}">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<section id="search">
+		<form id="search-parameters" th:object="${EmployeeSearch}" class="employee-search-form">
+			<label for="search-parameters-name">Imię</label>
+			<input name="name" type="text" id="search-parameters-name" maxlength="300" placeholder="Imię lub nazwisko" >
+			<input type="submit" value="Szukaj" id="search-paramters-submit">
+			<input type="reset" value="Reset" id="search-parameters-reset">
+		</form>
+	</section>
+	<section>
+		<table class="employees-search-result">
+			</thead>
+			<tbody class="employees-search-result">
+			<tr th:each="e : ${EmployeeList}" class="employee-search-result">
+				<td class="employee-search-result" th:text="${e.name}"></td>
+				<td class="employee-search-result" th:text="${e.getScientificTitles()}"></td>
+				<td class="employee-search-result" th:text="${e.getEmail()}"></td>
+				<td class="employee-search-result" th:text="${e.getWww()}"></td>
+				<td sec:authorize="hasRole('ADMIN')" class="employee-search-result" >Edytuj</td>
+			</tr>
+			</tbody>
+		</table>
+	</section>
+</main>
+</body>
+</html>

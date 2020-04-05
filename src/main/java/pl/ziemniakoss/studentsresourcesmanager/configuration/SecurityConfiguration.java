@@ -35,20 +35,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/", "/home").permitAll()
-				.antMatchers("/resources/**").permitAll()
-				.anyRequest().authenticated()
+				.antMatchers("/res-admin/**").hasRole("ADMIN")
+				.antMatchers("/res-employee/**").hasRole("EMPLOYEE")
+				.antMatchers("/res-student/**").hasRole("STUDENT")
+				.anyRequest().fullyAuthenticated()
 				.and()
-				.formLogin().permitAll()
-				.and()
-				.logout()
-				.permitAll();
+				.formLogin().permitAll();
 	}
 
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**").anyRequest();
-	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

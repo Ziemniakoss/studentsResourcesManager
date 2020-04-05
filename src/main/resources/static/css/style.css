@@ -1,0 +1,17 @@
+body{
+	background-color: #313131;
+	color: #cccccc;
+	font-size: 18px;
+}
+
+footer {
+	position: fixed;
+	width: 90%;
+	bottom: 0;
+
+	margin: auto;
+}
+.contact{
+	background-color: darkred;
+	color: pink;
+}
