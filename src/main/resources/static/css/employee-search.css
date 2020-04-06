@@ -31,5 +31,10 @@ thead > tr > td.employee-search-result {
 	background: #414141;
 }
 
+tbody>tr>td>a.employee-search-result{
+	color: white;
+	text-decoration: none;
+}
+
 
 

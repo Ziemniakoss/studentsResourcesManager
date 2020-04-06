@@ -24,7 +24,7 @@ public class EmployeeSearchController {
 	public String employee(Model model, @ModelAttribute EmployeeSearch search) {
 		model.addAttribute("EmployeeSearch", new EmployeeSearch());
 		Collection<Employee> employees = null;
-		if(search.getName().trim().length() == 0){
+		if(search.getName() == null || search.getName().trim().length() == 0){
 			employees = employeeRepository.getAll();
 		}else {
 			employees = employeeRepository.getAllWithNameLike(search.getName());

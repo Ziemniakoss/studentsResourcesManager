@@ -13,7 +13,7 @@
 	<section id="search">
 		<form id="search-parameters" th:object="${EmployeeSearch}" class="employee-search-form">
 			<label for="search-parameters-name">Imię</label>
-			<input name="name" type="text" id="search-parameters-name" maxlength="300" placeholder="Imię lub nazwisko" >
+			<input name="name" type="text" id="search-parameters-name" maxlength="300" placeholder="Imię lub nazwisko">
 			<input type="submit" value="Szukaj" id="search-paramters-submit">
 			<input type="reset" value="Reset" id="search-parameters-reset">
 		</form>
@@ -25,9 +25,17 @@
 			<tr th:each="e : ${EmployeeList}" class="employee-search-result">
 				<td class="employee-search-result" th:text="${e.name}"></td>
 				<td class="employee-search-result" th:text="${e.getScientificTitles()}"></td>
-				<td class="employee-search-result" th:text="${e.getEmail()}"></td>
-				<td class="employee-search-result" th:text="${e.getWww()}"></td>
-				<td sec:authorize="hasRole('ADMIN')" class="employee-search-result" >Edytuj</td>
+				<td class="employee-search-result">
+					<a th:href="'mailto:' + ${e.getEmail()}" class="employee-search-result">
+						<div th:text="${e.getEmail()}"></div>
+					</a>
+				</td>
+				<td class="employee-search-result">
+					<a th:href="@{${e.getWww()}}" class="employee-search-result">
+						<div th:text="${e.getWww()}" style="width: 100%;height: 100%;"></div>
+					</a>
+				</td>
+				<td sec:authorize="hasRole('ADMIN')" class="employee-search-result">Edytuj</td>
 			</tr>
 			</tbody>
 		</table>
