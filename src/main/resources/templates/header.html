@@ -1,10 +1,23 @@
 <body>
-	<h2>Studres</h2>
-	<nav>
-		<ul>
-			<li><a href="/resources">Materiały</a></li>
-			<li><a href="/courses">Kursy</a></li>
-			<li><a href="/search/employees">Pracownicy</a></li>
-		</ul>
-	</nav>
+<nav class="menu-wrap">
+	<input type="checkbox" class="toggler">
+	<div class="hamburger">
+		<div></div>
+	</div>
+	<div class="menu">
+		<div>
+			<ul>
+				<!--TODO ładniejsze formatowanie-->
+				<li sec:authorize="hasRole('STUDENT')"><a href="#">Strefa Studenta</a></li>
+				<li sec:authorize="hasRole('EMPLOYEE')"><a href="#">Strefa Pracownika</a></li>
+				<li sec:authorize="hasRole('ADMIN')"><a href="#">Strefa Administratora</a></li>
+
+				<li><a href="/search/employees">Znajdź pracownika</a></li>
+				<li><a href="#">Przeglądaj wszystkie kursy</a></li>
+				<li><a href="#">Moje konto</a></li>
+				<li><a href="/logout">Wyloguj</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
 </body>
