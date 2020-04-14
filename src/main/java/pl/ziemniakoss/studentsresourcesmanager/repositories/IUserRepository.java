@@ -1,11 +1,11 @@
 package pl.ziemniakoss.studentsresourcesmanager.repositories;
 
 
-import pl.ziemniakoss.studentsresourcesmanager.models.User;
+import pl.ziemniakoss.studentsresourcesmanager.UserDetails;
 
 public interface IUserRepository {
-	User getUserByEmail(String email);
-	User getUserById(int id);
-	void changePassword(User user, String passwordPlain);
+	UserDetails getUserByEmail(String email);
+	UserDetails getUserById(int id);
+	void changePassword(UserDetails user, String passwordPlain);
 
 }

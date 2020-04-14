@@ -3,11 +3,10 @@ package pl.ziemniakoss.studentsresourcesmanager.repositories;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Repository;
-import pl.ziemniakoss.studentsresourcesmanager.models.User;
+import pl.ziemniakoss.studentsresourcesmanager.UserDetails;
 
 import java.sql.Array;
 import java.sql.ResultSet;
@@ -26,15 +25,15 @@ public class UserRepository implements IUserRepository {
 	}
 
 	@Override
-	public User getUserByEmail(String email) {
+	public UserDetails getUserByEmail(String email) {
 		ExecutorService threadPool = Executors.newCachedThreadPool();
 		System.out.println(email);
-		Future<User> getUser = (Future<User>) threadPool.submit(() -> {
-			User user = jdbcTemplate.query("SELECT * FROM users WHERE email = ?", new Object[]{email}, new ResultSetExtractor<User>() {
+		Future<UserDetails> getUser = (Future<UserDetails>) threadPool.submit(() -> {
+			UserDetails user = jdbcTemplate.query("SELECT * FROM users WHERE email = ?", new Object[]{email}, new ResultSetExtractor<UserDetails>() {
 						@Override
-						public User extractData(ResultSet rs) throws SQLException, DataAccessException {
+						public UserDetails extractData(ResultSet rs) throws SQLException, DataAccessException {
 							if(rs.next()) {
-								User u = new User();
+								UserDetails u = new UserDetails();
 								u.setEmail(rs.getString("email"));
 								u.setPassword(rs.getString("password_hash"));
 								u.setName(rs.getString("name"));
@@ -50,7 +49,7 @@ public class UserRepository implements IUserRepository {
 		Future<Collection<GrantedAuthority>> getAuthorities;
 		getAuthorities = (Future<Collection<GrantedAuthority>>) threadPool.submit(()-> getRoles(email));
 		try {
-			User u = getUser.get();
+			UserDetails u = getUser.get();
 			u.setAuthorities(getAuthorities.get());
 			return getUser.get();
 		} catch (InterruptedException e) {
@@ -62,12 +61,12 @@ public class UserRepository implements IUserRepository {
 	}
 
 	@Override
-	public User getUserById(int id) {//todo
+	public UserDetails getUserById(int id) {//todo
 		return null;
 	}
 
 	@Override
-	public void changePassword(User user, String passwordPlain) {//todo
+	public void changePassword(UserDetails user, String passwordPlain) {//todo
 
 	}
 

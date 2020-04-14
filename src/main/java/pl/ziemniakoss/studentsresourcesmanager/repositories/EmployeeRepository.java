@@ -1,12 +1,8 @@
 package pl.ziemniakoss.studentsresourcesmanager.repositories;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.client.HttpServerErrorException;
 import pl.ziemniakoss.studentsresourcesmanager.models.Employee;
-import pl.ziemniakoss.studentsresourcesmanager.models.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -10,12 +10,33 @@
 <header th:insert="header"></header>
 <main>
 	<h1>Witaj </h1>
+	<section id="manage-users" class="container with-shaddow">
+		<h2>Zarządzaj użytkownikami</h2>
+		<nav>
+			<ul>
+				<li><a href="/res-admin/users">Lista użytkowników</a></li>
+				<li><a href="/res-admin/users/employees/add">Dodaj nowego pracownika</a></li>
+				<li><a href="/res-admin/users/students/add">Dodaj nowego studenta</a></li>
+				<li><a href="/res-admin/users/mass-add">Dodaj użytkowników z pliku</a></li>
+			</ul>
+		</nav>
+	</section>
+
+	<section id="manage-courses" class="container with-shaddow">
+		<h2>Kursy</h2>
+		<nav>
+			<ul>
+				<li><a href="/res-admin/courses/add">Utwórz nowy(TODO)</a></li>
+				<li><a href="/res-admin/courses">Przejrzyj wszystkie(TODO)</a></li>
+			</ul>
+		</nav>
+	</section>
+
+	<section id="system-monitor" class="container with-shaddow">
+		<h2>Monitor systemu</h2>
+		TODO
+	</section>
 	<ul>
-		<li><a href="/res-admin/manage/users">Zarządzaj użytkownikami</a></li>
-		<li><a href="/res-admin/manage/courses">Zarządzaj Kursami(TODO)</a></li>
-		<li><a href="/res-admin/manage/classes">Zarządzaj Klasami(TODO)</a></li>
-		<li><a href="/res-admin/manage/files">Zarządzaj Plikami(TODO)</a></li>
-		<li><a href="/res-admin/manage/monitor">Monitor systemu(TODO)</a></li>
 	</ul>
 </main>
 </body>

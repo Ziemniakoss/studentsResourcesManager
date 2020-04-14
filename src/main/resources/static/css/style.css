@@ -4,11 +4,12 @@
 	--menu-speed: 0.15s;
 }
 
+
 header {
 	background-color: var(--header-color);
 	width: 100vw;
 	height: 62px;
-	margin: 0 0 20px;
+	margin: -8px 0px;
 	padding: 0;
 	display: flex;
 }
@@ -16,8 +17,6 @@ body{
 	background-color: #202020;
 	color: #cccccc;
 	font-size: 18px;
-	margin: 0;
-	padding: 0;
 }
 
 footer {
@@ -27,9 +26,21 @@ footer {
 
 	margin: auto;
 }
-.contact{
+
+.contact {
 	background-color: darkred;
 	color: pink;
+}
+
+.container {
+	background-color: #404040;
+	color: white;
+	margin: 20px;
+	padding: 20px;
+}
+
+.with-shaddow {
+	box-shadow: 0px 6px 7px 6px #111;
 }
 
 /**
