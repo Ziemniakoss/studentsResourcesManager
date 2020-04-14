@@ -98,7 +98,7 @@ footer {
 
 /* Toggler Animation */
 .toggler:checked + .hamburger > div {
-	transform: rotate(135deg);
+	transform: rotate(45deg);
 }
 
 /* Turns Lines Into X */
@@ -106,11 +106,6 @@ footer {
 .toggler:checked + .hamburger > div:after {
 	top: 0;
 	transform: rotate(90deg);
-}
-
-/* Rotate On Hover When Checked */
-.toggler:checked:hover + .hamburger > div {
-	transform: rotate(225deg);
 }
 
 /* Show Menu */

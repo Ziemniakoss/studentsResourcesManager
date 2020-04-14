@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>Witaj adminie</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<h1>Witaj </h1>
+	<ul>
+		<li><a href="/res-admin/manage/users">Zarządzaj użytkownikami</a></li>
+		<li><a href="/res-admin/manage/courses">Zarządzaj Kursami(TODO)</a></li>
+		<li><a href="/res-admin/manage/classes">Zarządzaj Klasami(TODO)</a></li>
+		<li><a href="/res-admin/manage/files">Zarządzaj Plikami(TODO)</a></li>
+		<li><a href="/res-admin/manage/monitor">Monitor systemu(TODO)</a></li>
+	</ul>
+</main>
+</body>
+</html>
