@@ -6,16 +6,16 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class CustomUserDetails implements org.springframework.security.core.userdetails.UserDetails {
 	private int id;
 	private String email;
 	private String password;
 	private String name;
 	private Collection<GrantedAuthority> authorities;
 
-	public UserDetails(){}
+	public CustomUserDetails(){}
 
-	public UserDetails(int id, String email, String password, String name, String role) {
+	public CustomUserDetails(int id, String email, String password, String name, String role) {
 		this.id = id;
 		this.email = email;
 		this.password = password;
@@ -24,11 +24,11 @@ public class UserDetails implements org.springframework.security.core.userdetail
 		authorities.add(new SimpleGrantedAuthority(role));
 	}
 
-	public UserDetails(String email, String password, String name) {
+	public CustomUserDetails(String email, String password, String name) {
 		this(0, email,password,name, "");
 	}
 
-	public UserDetails(int id, String email, String password, String name, Collection<GrantedAuthority> authorities) {
+	public CustomUserDetails(int id, String email, String password, String name, Collection<GrantedAuthority> authorities) {
 		this.id = id;
 		this.email = email;
 		this.password = password;

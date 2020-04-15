@@ -1,26 +1,53 @@
 package pl.ziemniakoss.studentsresourcesmanager.services;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
-import pl.ziemniakoss.studentsresourcesmanager.UserDetails;
-import pl.ziemniakoss.studentsresourcesmanager.repositories.UserRepository;
+import pl.ziemniakoss.studentsresourcesmanager.CustomUserDetails;
+import pl.ziemniakoss.studentsresourcesmanager.repositories.IUserDetailsRepository;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsManager {
 
-	private final UserRepository userRepository;
+	private final IUserDetailsRepository userDetailsRepository;
 
-	public CustomUserDetailsService(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public CustomUserDetailsService(IUserDetailsRepository userDetailsRepository) {
+		this.userDetailsRepository = userDetailsRepository;
 	}
 
 	@Override
 	public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-		UserDetails u = userRepository.getUserByEmail(s);
-		if(u == null){
+		CustomUserDetails u = userDetailsRepository.getByEmail(s);
+		if (u == null) {
 			throw new UsernameNotFoundException(s);
 		}
 		return u;
+	}
+
+	@Override
+	public void createUser(UserDetails user) {
+		//todo
+	}
+
+	@Override
+	public void updateUser(UserDetails user) {
+		//todo
+	}
+
+	@Override
+	public void deleteUser(String username) throws UsernameNotFoundException {
+		//todo
+	}
+
+	@Override
+	public void changePassword(String oldPassword, String newPassword) {
+		//todo
+	}
+
+	@Override
+	public boolean userExists(String username) {
+		return userDetailsRepository.exists(username);
 	}
 }
