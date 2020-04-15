@@ -8,7 +8,7 @@ public class User {
 	private boolean student;
 	private boolean employee;
 	private String www;
-	private String titles;
+	private String scientificTitles;
 
 	public String getWww() {
 		return www;
@@ -18,12 +18,12 @@ public class User {
 		this.www = www;
 	}
 
-	public String getTitles() {
-		return titles;
+	public String getScientificTitles() {
+		return scientificTitles;
 	}
 
-	public void setTitles(String titles) {
-		this.titles = titles;
+	public void setScientificTitles(String scientificTitles) {
+		this.scientificTitles = scientificTitles;
 	}
 
 	public User() {
@@ -48,7 +48,7 @@ public class User {
 		this.student = student;
 		this.employee = employee;
 		this.www = www;
-		this.titles = titles;
+		this.scientificTitles = titles;
 	}
 
 	public boolean isAdmin() {

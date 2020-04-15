@@ -40,11 +40,12 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public List<User> getAll(String like, boolean student, boolean employee, boolean admin) {
 		StringBuilder sqlBuilder = new StringBuilder();
-		sqlBuilder.append("SELECT u.id AS id, u.name AS name, u.email AS email, (e.id IS NOT NULL) AS employee, (s.id IS NOT NULL) AS student, e.www as www, e.titles as titles" +
+		sqlBuilder.append("SELECT u.id AS id, u.name AS name, u.email AS email, (e.id IS NOT NULL) AS employee, (s.id IS NOT NULL) AS student, e.www as www, e.scientific_titles as titles, (a.id IS NOT NULL) as admin " +
 				" FROM users u " +
 				" FULL OUTER JOIN employees e ON u.id = e.id " +
 				" FULL OUTER JOIN admins a ON u.id = a.id " +
-				" FULL OUTER JOIN students s ON u.id = s.id ");
+				" FULL OUTER JOIN students s ON u.id = s.id " +
+				" WHERE lower(name) LIKE ?");
 		if (student) {
 			sqlBuilder.append(" AND s.id IS NOT NULL ");
 		}
@@ -54,12 +55,12 @@ public class UserRepository implements IUserRepository {
 		if (admin) {
 			sqlBuilder.append(" AND a.id IS NOT NULL");
 		}
-		if (like != null && like.length() != 0) {
-			sqlBuilder.append(" WHERE lower(name) LIKE ? ");
-			return jdbcTemplate.query(sqlBuilder.toString(), new Object[]{like}, (rs, rn) -> extractUser(rs));
-		} else {
-			return jdbcTemplate.query(sqlBuilder.toString(), (rs, rn) -> extractUser(rs));
+		if (like == null || like.length() == 0) {
+			like = "%";
+		}else{
+			like = '%' + like.trim()+'%';
 		}
+		return jdbcTemplate.query(sqlBuilder.toString(), new Object[]{like},(rs, rn) -> extractUser(rs));
 	}
 
 	private User extractUser(ResultSet rs) throws SQLException {
@@ -71,7 +72,7 @@ public class UserRepository implements IUserRepository {
 		u.setStudent(rs.getBoolean("student"));
 		u.setEmployee(rs.getBoolean("employee"));
 		if (u.isEmployee()) {
-			u.setTitles(rs.getString("titles"));
+			u.setScientificTitles(rs.getString("titles"));
 			u.setWww(rs.getString("www"));
 		}
 		return u;
