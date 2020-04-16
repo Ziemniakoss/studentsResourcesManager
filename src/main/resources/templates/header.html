@@ -8,9 +8,9 @@
 		<div>
 			<ul>
 				<!--TODO ładniejsze formatowanie-->
-				<li sec:authorize="hasRole('STUDENT')"><a href="#">Strefa Studenta</a></li>
-				<li sec:authorize="hasRole('EMPLOYEE')"><a href="#">Strefa Pracownika</a></li>
-				<li sec:authorize="hasRole('ADMIN')"><a href="#">Strefa Administratora</a></li>
+				<li sec:authorize="hasRole('STUDENT')"><a href="/res-student">Strefa Studenta</a></li>
+				<li sec:authorize="hasRole('EMPLOYEE')"><a href="/res-employee">Strefa Pracownika</a></li>
+				<li sec:authorize="hasRole('ADMIN')"><a href="/res-admin">Strefa Administratora</a></li>
 
 				<li><a href="/search/employees">Znajdź pracownika</a></li>
 				<li><a href="#">Przeglądaj wszystkie kursy</a></li>
