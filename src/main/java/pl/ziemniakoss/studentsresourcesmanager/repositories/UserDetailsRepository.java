@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Repository;
@@ -80,30 +81,7 @@ public class UserDetailsRepository implements IUserDetailsRepository {
 			throw new UsernameNotFoundException(updatedUserDetails.getUsername());
 		}
 		jdbcTemplate.update("UPDATE users set password_hash = ?, name = ? WHERE id = ?", updatedUserDetails.getPassword(), updatedUserDetails.getName(), updatedUserDetails.getId());
-		List<String> roles = updatedUserDetails.getAuthorities().parallelStream()
-				.filter(a -> a.getAuthority().startsWith("ROLE_"))
-				.map(a -> a.getAuthority().substring(6))
-				.collect(Collectors.toList());
-		boolean student = false, employee = false, admin = false;
-		for (String role : roles) {
-			switch (role) {
-				case "STUDENT":
-					student = true;
-					break;
-				case "ADMIN":
-					admin = true;
-					break;
-				case "EMPLOYEE":
-					employee = true;
-					break;
-				default:
-					log.error("Unknown role detected while trying to update user '" + updatedUserDetails.getUsername() + "': ROLE_" + role);
-			}
-		}
-		//todo może równolegle?
-		updateAdminStatus(updatedUserDetails.getEmail(), admin);
-		updateStudentStatus(updatedUserDetails.getEmail(), student);
-		updateEmployeeStatus(updatedUserDetails.getEmail(), employee);
+		updateRoles(updatedUserDetails);
 	}
 
 	@Override
@@ -114,6 +92,12 @@ public class UserDetailsRepository implements IUserDetailsRepository {
 		Boolean res = jdbcTemplate.queryForObject("SELECT EXISTS(SELECT id FROM users WHERE email = ?);",
 				new Object[]{email}, Boolean.class);
 		return res != null ? res : false;
+	}
+
+	@Override
+	public void add(CustomUserDetails userDetails) {
+		jdbcTemplate.update("INSERT INTO users (name, email, password_hash) VALUES (? ,?, ?);", userDetails.getName(), userDetails.getEmail(), userDetails.getPassword());
+		updateRoles(userDetails);
 	}
 
 	/**
@@ -163,4 +147,30 @@ public class UserDetailsRepository implements IUserDetailsRepository {
 		}
 	}
 
+	private void updateRoles(CustomUserDetails details) {
+		List<String> roles = details.getAuthorities().parallelStream()
+				.filter(a -> a.getAuthority().startsWith("ROLE_"))
+				.map(a -> a.getAuthority().substring(6))
+				.collect(Collectors.toList());
+		boolean student = false, employee = false, admin = false;
+		for (String role : roles) {
+			switch (role) {
+				case "STUDENT":
+					student = true;
+					break;
+				case "ADMIN":
+					admin = true;
+					break;
+				case "EMPLOYEE":
+					employee = true;
+					break;
+				default:
+					log.error("Unknown role detected while trying to update user '" + details.getUsername() + "': ROLE_" + role);
+			}
+		}
+		//todo może równolegle?
+		updateAdminStatus(details.getEmail(), admin);
+		updateStudentStatus(details.getEmail(), student);
+		updateEmployeeStatus(details.getEmail(), employee);
+	}
 }
