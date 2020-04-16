@@ -11,7 +11,7 @@ public class AdminHomeController {
 	@GetMapping("/res-admin")
 	@RolesAllowed("ADMIN")
 	public String home(){
-		return "admin-home";
+		return "admin_home";
 
 	}
 }

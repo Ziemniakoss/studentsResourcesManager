@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class EmployeeHomeController {
 	@GetMapping("/res-employee")
 	public String home(){
-		return "employee-home";
+		return "employee_home";
 	}
 }

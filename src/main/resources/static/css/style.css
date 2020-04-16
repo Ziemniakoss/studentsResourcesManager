@@ -4,12 +4,19 @@
 	--menu-speed: 0.15s;
 }
 
+h1{
+	width: 80%;
+	text-align: center;
+	margin: 0 auto;
+}
 
 header {
 	background-color: var(--header-color);
 	width: 100vw;
-	height: 62px;
-	margin: -8px 0px;
+	height: 64px;
+	margin-top: -8px;
+	margin-left: 0;
+	margin-right: 0;
 	padding: 0;
 	display: flex;
 }

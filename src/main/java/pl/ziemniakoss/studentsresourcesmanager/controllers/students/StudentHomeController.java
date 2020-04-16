@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class StudentHomeController {
 	@GetMapping("/res-student")
 	public String home(){
-		return "student-home";
+		return "student_home";
 	}
 }
