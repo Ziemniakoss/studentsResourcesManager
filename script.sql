@@ -585,3 +585,6 @@ $$;
 ALTER FUNCTION create_class(INTEGER, EMAIL, CHAR) OWNER TO postgres;
 
 
+
+INSERT INTO users (name, email, password_hash, id) VALUES ('Admin', 'admin@pw.edu.pl', '$2a$12$dP6HIH8AI01y4wPE9eGfVOBXa9tjVoOuGBPkYDITiVwpQjrwkbZou', 19);
+INSERT INTO admins (id) VALUES (19);
