@@ -4,7 +4,7 @@
 	--menu-speed: 0.15s;
 }
 
-h1{
+h1 {
 	width: 80%;
 	text-align: center;
 	margin: 0 auto;
@@ -20,7 +20,8 @@ header {
 	padding: 0;
 	display: flex;
 }
-body{
+
+body {
 	background-color: #202020;
 	color: #cccccc;
 	font-size: 18px;
@@ -34,6 +35,31 @@ footer {
 	margin: auto;
 }
 
+#error-messages{
+	display: flex;
+}
+ul.error {
+	list-style-type: none;
+	margin: 0 auto;
+}
+
+li.error{
+	background-color: darkred;
+	color: #232323;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 10px;
+}
+.success {
+	background-color: rgb(7, 51, 6);
+	color: white;
+	margin: auto;
+	padding: 10px
+}
+
+div.success {
+	text-align: center;
+}
 .contact {
 	background-color: darkred;
 	color: pink;

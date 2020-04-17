@@ -1,5 +1,6 @@
 package pl.ziemniakoss.studentsresourcesmanager.utils;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -33,8 +34,7 @@ class PasswordUtilsTest {
 	 * Sprawdza czy automatycznie generowane hasła są poprawne
 	 * Powatrzamy pare razy żeby zwiększyć dokładność testu
 	 */
-	@Test
-	@Repeat(100)
+	@RepeatedTest(20)
 	void generateRandom() {
 		assertTrue(passwordUtils.isValid(passwordUtils.generateRandom()));
 	}

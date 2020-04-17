@@ -14,7 +14,7 @@ import pl.ziemniakoss.studentsresourcesmanager.services.CustomUserDetailsManager
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
-	private  CustomUserDetailsManager userDetailsService;
+	private CustomUserDetailsManager userDetailsService;
 
 
 	@Override
@@ -37,6 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.anyRequest().fullyAuthenticated()
 				.and()
 				.formLogin().permitAll();
+		http.cors().and().csrf().disable();
 	}
 
 

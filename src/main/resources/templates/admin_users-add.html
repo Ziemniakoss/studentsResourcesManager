@@ -9,8 +9,46 @@
 <body>
 <header th:insert="header"></header>
 <main>
-	<h1>Dodaj użytkownika</h1>
+	<section id="error-messages">
+		<ul class="error">
+			<li th:each="e : ${errors}" class="error with-shaddow">
+				<article th:text="${e}" class="error"></article>
+			</li>
+			<li th:if="${errorMessage != null}" class="error with-shaddow">
+				<article th:text="${errorMessage}" class="error"></article>
+			</li>
+		</ul>
+	</section>
 	<section id="new-user-data">
+		<h1>Dodaj użytkownika</h1>
+		<form method="post" th:object="${userCreationRequest}" action="/res-admin/users/add">
+			<div class="error" th:if="${#fields.hasErrors('name')}" >
+				hhhhhhhhhhhhhhhhhhhhhhhhhhhh
+			</div>
+			<input type="text" name="name" id="name" placeholder="Imię" th:text="${userCreationRequest.getName()}"
+				   min="3" max="200">
+			<input name="email" type="email" id="email" th:text="${userCreationRequest.getEmail()}" placeholder="email">
+			<input name="password" placeholder="Hasło(puste wygeneuje losowe)" type="password">
+			<div class="roles-wrapper">
+				<div class="user-role-wrapper">
+					<h3>Student</h3>
+					<label for="student">Jest studentem?</label>
+					<input id="student" name="student" type="checkbox">
+				</div>
+				<div class="employee-role-wrapper">
+					<h3>Pracownik</h3>
+					<label>Czy jest pracownikiem?</label>
+					<input id="employee" name="employee" type="checkbox">
+					<input name="www" placeholder="Strona www">
+					<input name="scientificTitles" type="text" max="50">
+				</div>
+			</div>
+			<input type="submit" value="Utwórz">
+			<div class="cancel-button">
+				Anuluj
+			</div>
+		</form>
+
 
 	</section>
 </main>

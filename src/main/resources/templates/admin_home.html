@@ -10,6 +10,9 @@
 <header th:insert="header"></header>
 <main>
 	<h1>Witaj </h1>
+	<article th:if="${successMessage != null}" class="success">
+		<div th:text="${successMessage}" class="success"></div>
+	</article>
 	<section id="manage-users" class="container with-shaddow">
 		<h2>Zarządzaj użytkownikami</h2>
 		<nav>

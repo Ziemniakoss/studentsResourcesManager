@@ -2,7 +2,6 @@ package pl.ziemniakoss.studentsresourcesmanager.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,7 +43,6 @@ public class CustomUserDetailsManager implements UserDetailsManager {
 	 *
 	 * @param user użytkownik do utworzenia. <b>Pole password musi zawierać hasło w plain text</b> w celu weryfikacji
 	 * @throws IllegalArgumentException jeżeli użytkownik istnieje, hasło nie spełnia wymagań lub email nie jest poprawny
-	 *
 	 */
 	@Override
 	public void createUser(UserDetails user) {
@@ -56,7 +54,6 @@ public class CustomUserDetailsManager implements UserDetailsManager {
 		Assert.isTrue(emailUtils.isEmail(details.getEmail()), "Illegal email");
 		Assert.isTrue(!userExists(details.getUsername()), "User already exists");
 		Assert.isTrue(passwordUtils.isValid(details.getPassword()), "Illegal password");
-
 		String passwordHash = passwordEncoder.encode(details.getPassword());
 		details.setPassword(passwordHash);
 		userDetailsRepository.add(details);
