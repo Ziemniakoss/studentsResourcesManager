@@ -126,7 +126,7 @@ public class UserDetailsRepository implements IUserDetailsRepository {
 			jdbcTemplate.update("DELETE FROM students WHERE id = (SELECT id FROM users WHERE email = ?);", email);
 			log.info("'" + email + "' is no longer a student");
 		} else if (res == 0 && student) {
-			jdbcTemplate.update("INSERT INTO students (id) VALUES (?);", email);
+			jdbcTemplate.update("INSERT INTO students (id) VALUES ((SELECT id FROM users WHERE email = ?));", email);
 			log.info('\'' + email + "' is now a student");
 		}
 	}
@@ -150,7 +150,7 @@ public class UserDetailsRepository implements IUserDetailsRepository {
 	private void updateRoles(CustomUserDetails details) {
 		List<String> roles = details.getAuthorities().parallelStream()
 				.filter(a -> a.getAuthority().startsWith("ROLE_"))
-				.map(a -> a.getAuthority().substring(6))
+				.map(a -> a.getAuthority().substring(5))
 				.collect(Collectors.toList());
 		boolean student = false, employee = false, admin = false;
 		for (String role : roles) {

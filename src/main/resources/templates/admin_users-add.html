@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Dodaj użytkownika</title>
 	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/admin_user-add.css">
 </head>
 <body>
 <header th:insert="header"></header>
@@ -19,34 +20,43 @@
 			</li>
 		</ul>
 	</section>
-	<section id="new-user-data">
+	<section id="new-user-data" class="container with-shaddow">
 		<h1>Dodaj użytkownika</h1>
 		<form method="post" th:object="${userCreationRequest}" action="/res-admin/users/add">
-			<div class="error" th:if="${#fields.hasErrors('name')}" >
-				hhhhhhhhhhhhhhhhhhhhhhhhhhhh
-			</div>
-			<input type="text" name="name" id="name" placeholder="Imię" th:text="${userCreationRequest.getName()}"
-				   min="3" max="200">
-			<input name="email" type="email" id="email" th:text="${userCreationRequest.getEmail()}" placeholder="email">
-			<input name="password" placeholder="Hasło(puste wygeneuje losowe)" type="password">
-			<div class="roles-wrapper">
-				<div class="user-role-wrapper">
+			<section id="user-basic-data-wrappper">
+				<label for="name"> Imię i nazwisko</label>
+				<input type="text" name="name" id="name" placeholder="Imię" th:text="${userCreationRequest.getName()}"
+					   min="3" max="200">
+				<label for="email">Adres email</label>
+				<input name="email" type="email" id="email" th:text="${userCreationRequest.getEmail()}"
+					   placeholder="email">
+				<label for="password"> Hasło</label>
+				<input id="password" name="password" placeholder="Hasło(puste wygeneuje losowe)" type="password">
+			</section>
+			<section id="roles-wrapper">
+				<section id="user-role-wrapper" class="single-role-wrapper">
 					<h3>Student</h3>
 					<label for="student">Jest studentem?</label>
 					<input id="student" name="student" type="checkbox">
-				</div>
-				<div class="employee-role-wrapper">
+				</section>
+				<section id="employee-role-wrapper" class="single-role-wrapper">
 					<h3>Pracownik</h3>
-					<label>Czy jest pracownikiem?</label>
+					<label for="employee">Czy jest pracownikiem?</label>
 					<input id="employee" name="employee" type="checkbox">
-					<input name="www" placeholder="Strona www">
-					<input name="scientificTitles" type="text" max="50">
-				</div>
-			</div>
-			<input type="submit" value="Utwórz">
-			<div class="cancel-button">
-				Anuluj
-			</div>
+					<label for="www">Strona www</label>
+					<input name="www" placeholder="Strona www" id="www">
+					<label for="titles">Tytuły naukowe</label>
+					<input name="scientificTitles" type="text" max="50" id="titles">
+				</section>
+			</section>
+			<section id="buttons">
+				<input type="submit" value="Utwórz">
+				<a href="/res-admin">
+					<div id="cancel-button">
+						Anuluj
+					</div>
+				</a>
+			</section>
 		</form>
 
 

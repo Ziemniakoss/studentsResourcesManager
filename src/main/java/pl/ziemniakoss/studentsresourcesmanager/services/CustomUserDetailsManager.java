@@ -53,7 +53,7 @@ public class CustomUserDetailsManager implements UserDetailsManager {
 		CustomUserDetails details = (CustomUserDetails) user;
 		Assert.isTrue(emailUtils.isEmail(details.getEmail()), "Illegal email");
 		Assert.isTrue(!userExists(details.getUsername()), "User already exists");
-		Assert.isTrue(passwordUtils.isValid(details.getPassword()), "Illegal password");
+		Assert.isTrue(passwordUtils.isValid(details.getPassword()), "Niepoprawne hasło");
 		String passwordHash = passwordEncoder.encode(details.getPassword());
 		details.setPassword(passwordHash);
 		userDetailsRepository.add(details);
