@@ -1,0 +1,76 @@
+#new-user-data{
+	width: max-content;
+	margin: 0 auto;
+	display: flex;
+	flex-flow: column;
+}
+
+#user-basic-data-wrappper{
+	display: grid;
+	grid-template-columns: max-content auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	margin: 10px;
+}
+#user-basic-data-wrappper > label{
+	grid-column: 1;
+}
+#user-basic-data-wrappper > input{
+	grid-column: 2;
+}
+
+#roles-wrapper{
+	display: grid;
+	grid-template-columns: 1fr 1fr
+}
+
+.single-role-wrapper{
+	margin: 10px;
+	display: grid;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	grid-template-columns: max-content auto;
+	align-items: start;
+	background: #545454;
+	padding: 20px;
+}
+
+.single-role-wrapper > label{
+	grid-column: 1;
+}
+
+.single-role-wrapper > input{
+	grid-column: 2;
+}
+
+
+.single-role-wrapper > h3{
+	grid-column: 1/-1;
+	text-align: center;
+}
+
+
+#buttons{
+	display: flex;
+	margin-top: 20px;
+	padding: 10px;
+	justify-content: space-between;
+}
+
+#buttons > *{
+	width: 45%;
+	background-color: #666;
+	border: none;
+	padding: 15px;
+	text-align: center;
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+}
+#buttons >input{
+	background-color: darkgreen;
+}
+
+#cancel-button, #buttons >a{
+	background-color: darkred;
+}

@@ -34,4 +34,12 @@ public interface IUserDetailsRepository {
 	 * @return false jeżeli nie istniej lub email był nullem, true jeżeli istnieje
 	 */
 	boolean exists(String email);
+
+	/**
+	 * Tworzy nowego użytkownika. Metoda nie sprawdza czy użytkownik o takim emailu istnieje
+	 * ani nie sprawdza poprawności danych. Jeżeli będą niepoprawne może nastąpić błąd check na tablei
+	 * <i>users</i>
+	 * @param userDetails dane nowego użytkownik. <b>Pole password musi zawierać zahashowane hasło</b>
+	 */
+	void add(CustomUserDetails userDetails);
 }
