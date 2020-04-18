@@ -18,13 +18,15 @@ kursu.
 
 Osoby zapisne na klasę pewnego kursu mają dostęp do wszyskich zaosbów przpisanych do ich klasy ale i również do zasobów przypisanych bezpośrednio do kursu. Osoby zapisane do jednej klasy pewnego kursu nie mają dostępu do zasobów przypisanych do innej klasy tego samego kursu
 
-## Budowanie bazy
- 
-Baza danych PostgreSQL może zostać zbudoana ze skryptu w pliku script.sql
-
 ## Uruchamianie
+ 
+W celu zbudowania i uruchomienia konteneru z aplikacją należy uruchomić skrypt:
 
-Po uruchomieniu na porcie 8080 powinna uruchomić się aplikacja. Zakładając,
-że skrypt do budowania bazy został wykonany powinno dać się zalogować użytkownikiem:
- - login: admin@pw.edu.pl
- - hasło: haslo123456
+```bash
+./build-and-start.sh 
+```
+
+Po wykonaniu tej komendy na porcie 8080 będzie działać aplikacja z jednym
+użytkownikiem o roli admina z:
+ - loginem: admin@pw.edu.pl
+ - hasłem: haslo123456

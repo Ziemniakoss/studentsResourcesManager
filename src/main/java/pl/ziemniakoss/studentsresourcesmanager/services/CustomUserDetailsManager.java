@@ -2,6 +2,7 @@ package pl.ziemniakoss.studentsresourcesmanager.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,15 +19,16 @@ public class CustomUserDetailsManager implements UserDetailsManager {
 	private final Logger log = LoggerFactory.getLogger(CustomUserDetailsManager.class);
 
 	private final IUserDetailsRepository userDetailsRepository;
-	private final EmailUtils emailUtils;
-	private final PasswordUtils passwordUtils;
-	private final PasswordEncoder passwordEncoder;
 
-	public CustomUserDetailsManager(IUserDetailsRepository userDetailsRepository, EmailUtils emailUtils, PasswordUtils passwordUtils, PasswordEncoder passwordEncoder) {
+	@Autowired
+	private EmailUtils emailUtils;
+	@Autowired
+	private PasswordUtils passwordUtils;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	public CustomUserDetailsManager(IUserDetailsRepository userDetailsRepository) {
 		this.userDetailsRepository = userDetailsRepository;
-		this.emailUtils = emailUtils;
-		this.passwordUtils = passwordUtils;
-		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
