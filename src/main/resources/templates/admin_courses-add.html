@@ -16,11 +16,14 @@
                 <input name="name" type="text" maxlength="200" required id="course-name">
                 <div th:object="${user}">
                     <label for="coordinator-id">Prowadzący</label>
-                    <select name="id" id="coordinator-id">
+                    <select name="id" id="coordinator-id" required>
+                        <option value=""  selected hidden>...</option>
                         <option th:each="emp : ${employees}" th:value="${emp.id}"
                                 th:text="${emp.getName() + '('+emp.getEmail()+')'}"></option>
                     </select>
                 </div>
+                <label for="course-description">Opis kursu</label>
+                <input type="text" name="description" id="course-description">
             </section>
             <section id="buttons">
                 <a class="cancel-button" href="/res-admin">

@@ -39,7 +39,7 @@ public class UserDetailsRepository implements IUserDetailsRepository {
 	public CustomUserDetails getByEmail(String email) {
 		ExecutorService threadPool = Executors.newCachedThreadPool();
 		System.out.println(email);
-		Future<CustomUserDetails> getUser = (Future<CustomUserDetails>) threadPool.submit(() -> {
+		Future<CustomUserDetails> getUser = threadPool.submit(() -> {
 			CustomUserDetails user = jdbcTemplate.query("SELECT * FROM users WHERE email = ?", new Object[]{email}, rs -> {
 						if (rs.next()) {
 							CustomUserDetails u = new CustomUserDetails();
