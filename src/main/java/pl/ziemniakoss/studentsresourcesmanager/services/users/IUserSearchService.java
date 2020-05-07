@@ -1,4 +1,4 @@
-package pl.ziemniakoss.studentsresourcesmanager.services;
+package pl.ziemniakoss.studentsresourcesmanager.services.users;
 
 
 import pl.ziemniakoss.studentsresourcesmanager.models.User;

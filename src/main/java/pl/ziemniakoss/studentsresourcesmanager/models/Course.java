@@ -41,4 +41,14 @@ public class Course {
 	public void setCoordinator(User coordinator) {
 		this.coordinator = coordinator;
 	}
+
+	@Override
+	public String toString() {
+		return "Course{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", coordinator=" + coordinator +
+				'}';
+	}
 }

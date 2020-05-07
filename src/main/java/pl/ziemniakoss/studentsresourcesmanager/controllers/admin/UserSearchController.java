@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import pl.ziemniakoss.studentsresourcesmanager.models.UserSearch;
-import pl.ziemniakoss.studentsresourcesmanager.services.IUserSearchService;
+import pl.ziemniakoss.studentsresourcesmanager.services.users.IUserSearchService;
 
 @Controller
 public class UserSearchController {
