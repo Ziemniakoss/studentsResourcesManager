@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import pl.ziemniakoss.studentsresourcesmanager.models.Course;
 import pl.ziemniakoss.studentsresourcesmanager.models.User;
-import pl.ziemniakoss.studentsresourcesmanager.repositories.ICourseRepository;
-import pl.ziemniakoss.studentsresourcesmanager.repositories.IUserRepository;
+import pl.ziemniakoss.studentsresourcesmanager.repositories.courses.ICourseRepository;
+import pl.ziemniakoss.studentsresourcesmanager.repositories.users.IUserRepository;
 
 @Service
 public class CourseManagerService implements ICourseManagementService {

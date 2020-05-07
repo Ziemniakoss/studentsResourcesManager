@@ -10,7 +10,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import pl.ziemniakoss.studentsresourcesmanager.CustomUserDetails;
-import pl.ziemniakoss.studentsresourcesmanager.repositories.IUserDetailsRepository;
+import pl.ziemniakoss.studentsresourcesmanager.repositories.userdetails.IUserDetailsRepository;
 import pl.ziemniakoss.studentsresourcesmanager.utils.EmailUtils;
 import pl.ziemniakoss.studentsresourcesmanager.utils.PasswordUtils;
 

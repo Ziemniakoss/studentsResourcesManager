@@ -1,4 +1,4 @@
-package pl.ziemniakoss.studentsresourcesmanager.repositories;
+package pl.ziemniakoss.studentsresourcesmanager.repositories.users;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

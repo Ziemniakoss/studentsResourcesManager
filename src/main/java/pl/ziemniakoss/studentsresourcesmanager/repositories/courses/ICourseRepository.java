@@ -1,4 +1,4 @@
-package pl.ziemniakoss.studentsresourcesmanager.repositories;
+package pl.ziemniakoss.studentsresourcesmanager.repositories.courses;
 
 import pl.ziemniakoss.studentsresourcesmanager.models.Course;
 

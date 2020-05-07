@@ -1,4 +1,4 @@
-package pl.ziemniakoss.studentsresourcesmanager.repositories;
+package pl.ziemniakoss.studentsresourcesmanager.repositories.courses;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
