@@ -10,7 +10,7 @@
 <main>
     <section class="container with-shaddow">
         <h1>Utwórz nowy kurs</h1>
-        <form th:object="${course}" method="post">
+        <form th:object="${course}" method="post" action="/res-admin/courses/add">
             <section id="course-data">
                 <label for="course-name">Nazwa</label>
                 <input name="name" type="text" maxlength="200" required id="course-name">

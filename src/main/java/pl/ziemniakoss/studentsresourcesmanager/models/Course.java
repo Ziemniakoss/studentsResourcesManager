@@ -2,9 +2,12 @@ package pl.ziemniakoss.studentsresourcesmanager.models;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotNull;
+
 
 public class Course {
 	private int id;
+	@NotNull(message = "Nazwa musi być podana")
 	@Length(min = 3, max = 200, message = "Nazwa kursu musi zawierać co najmniej 3 znaki i maksymalnie 200")
 	private String name;
 	private String description;
