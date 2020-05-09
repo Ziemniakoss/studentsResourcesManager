@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Kursy</title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<section id="query-data" class="container with-shaddow">
+		<form th:object="${query}">
+			<input placeholder="Nazwa" name="nameLike">
+			<select name="id" id="coordinator" >
+				<option value="" selected hidden>Prowadzący</option>
+				<option th:each="emp : ${employees}" th:value="${emp.id}"
+						th:text="${emp.getName() + '('+emp.getEmail()+')'}"></option>
+			</select>
+			<input type="submit" value="Wyszukaj">
+			<input type="reset" value="Resetuj">
+		</form>
+		<!--        TODO-->
+	</section>
+	<section id="results" class="container with-shaddow">
+		<table>
+			<thead>
+			<tr>
+				<td>Nazwa</td>
+				<td>Koordynator</td>
+				<td>Opis</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="course : ${courses}">
+				<td th:text="${course.name}"></td>
+				<td>
+					<a href="#" th:text="${course.coordinator.name +'(' + course.coordinator.email}">
+						<!--                     TODO linki do strony osoby-->
+					</a>
+				</td>
+				<td th:text=" ${course.description}"></td>
+				<td>
+					<a th:href="${'/res-admin/courses/' + course.getId()}"> Szczegóły </a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+	</section>
+</main>
+</body>
+</html>

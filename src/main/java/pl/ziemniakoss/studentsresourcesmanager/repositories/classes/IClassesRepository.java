@@ -14,5 +14,11 @@ public interface IClassesRepository {
 
 	Class get(int index);
 
+	/**
+	 * Zwraca wszsytkie klasy należące do danego kursu
+	 *
+	 * @param course
+	 * @return
+	 */
 	List<Class> getAll(Course course);
 }
