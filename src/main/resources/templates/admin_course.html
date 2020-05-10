@@ -44,11 +44,12 @@
 		</section>
 	</section>
 	<section id="classes-list" class="container with-shaddow">
+		<h2>Powiązane klasy</h2>
 		<table>
 			<thead>
 			<tr>
-				<td>Semestr</td>
-				<td>Prowadzący</td>
+				<th>Semestr</th>
+				<th>Prowadzący</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -59,12 +60,10 @@
 						<!--						TODO faktyczny link-->
 					</a>
 				</td>
-				<td>
+				<td class="table-buttons">
 					<form class="blue-button" th:action="${'/res-admin/classes/' + class.getId()}">
 						<button>Szczegóły</button>
 					</form>
-				</td>
-				<td>
 					<form class="red-button" th:action="${'/res-admin/classes/' + class.getId()+'/delete'}">
 						<button>Usuń klasę</button>
 					</form>
