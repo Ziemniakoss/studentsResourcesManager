@@ -19,14 +19,14 @@ import pl.ziemniakoss.studentsresourcesmanager.services.courses.ICourseManagemen
 
 
 @Controller
-public class CourseManagementController {
+public class AdminCourseManagementController {
 	private final IUserRepository userRepository;
 	private final ICourseManagementService courseManager;
 	private final ICourseRepository courseRepository;
 	private final IClassesRepository classesRepository;
 
-	public CourseManagementController(IUserRepository userRepository, ICourseManagementService courseManager,
-									  ICourseRepository courseRepository, IClassesRepository classesRepository) {
+	public AdminCourseManagementController(IUserRepository userRepository, ICourseManagementService courseManager,
+										   ICourseRepository courseRepository, IClassesRepository classesRepository) {
 		this.userRepository = userRepository;
 		this.courseManager = courseManager;
 		this.courseRepository = courseRepository;
@@ -73,5 +73,10 @@ public class CourseManagementController {
 		model.addAttribute("course", c);
 		model.addAttribute("classList", classesRepository.getAll(c));
 		return "admin_course";
+	}
+
+	@GetMapping("/res-admin/courses/{id}/delete")
+	public String deleteCourse(@PathVariable int id){
+		return "error_not-implemented";
 	}
 }

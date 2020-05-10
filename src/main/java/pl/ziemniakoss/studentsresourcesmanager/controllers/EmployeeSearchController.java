@@ -24,6 +24,6 @@ public class EmployeeSearchController {
 		model.addAttribute("EmployeeSearch", new EmployeeSearch());
 		Collection<User> employees = userRepository.getAll(search.getName(), false, true, false);
 		model.addAttribute("EmployeeList", employees);
-		return "employees_search";
+		return "employees-search";
 	}
 }
