@@ -11,6 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.ziemniakoss.studentsresourcesmanager.models.Resource;
 import pl.ziemniakoss.studentsresourcesmanager.services.resources.ResourceManagementService;
 
+import java.io.IOException;
+import java.rmi.server.ExportException;
+
 @Controller
 public class EmployeeResourcesManagementController {
 	@Autowired
@@ -33,8 +36,16 @@ public class EmployeeResourcesManagementController {
 
 	@PostMapping("/res-employee/resources/add/file")
 	public String addFile(@ModelAttribute Resource resourceDetails, @RequestParam("file") MultipartFile file, Model model) {
-		resourceManager.addFile(resourceDetails,file);
-		System.out.println(resourceDetails);
-		return "error_not-implemented";
+		try {
+			resourceManager.addFile(resourceDetails, file);
+			model.addAttribute("successMessage", "Dodano plik");
+			return "employee_resources";
+		}catch (IllegalArgumentException e){
+			model.addAttribute("errorMessage", e.getMessage());
+			return "employee_resources-add-file";
+		}catch (IOException e){
+			model.addAttribute("errorMessage", "Występił nieznany błąd. Spróbuj ponownie póżniej lub skontaktuj się z administratorem");
+			return "employee_resources-add-file";
+		}
 	}
 }

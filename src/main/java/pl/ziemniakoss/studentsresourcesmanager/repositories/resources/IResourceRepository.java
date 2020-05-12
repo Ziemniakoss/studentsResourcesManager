@@ -13,7 +13,14 @@ public interface IResourceRepository {
 
 	boolean hasAccess(int id, int userId);
 
-	void add(Resource resource, InputStream content);
+	void addFile(Resource resource, byte [] content, User owner);
+
+	/**
+	 * Dodaje zasób z innego serwera(link lub repozytoium).
+	 * @param resource dane nowego zasobu. <b>Pole {@code type} jest wymagane</b>.
+	 * @param link link do zdalengo zasobu
+	 */
+	void addExternalResource(Resource resource, String link, User owner);
 
 	void delete(Resource resource);
 

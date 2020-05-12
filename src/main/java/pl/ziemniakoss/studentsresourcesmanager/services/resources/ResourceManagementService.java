@@ -1,16 +1,21 @@
 package pl.ziemniakoss.studentsresourcesmanager.services.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 import pl.ziemniakoss.studentsresourcesmanager.models.Resource;
+import pl.ziemniakoss.studentsresourcesmanager.models.User;
 import pl.ziemniakoss.studentsresourcesmanager.repositories.resources.IResourceRepository;
+import pl.ziemniakoss.studentsresourcesmanager.repositories.users.IUserRepository;
 
 import java.io.IOException;
 
 @Service
 public class ResourceManagementService {
+	@Autowired
+	private IUserRepository userRepository;
 	@Autowired
 	private IResourceRepository resourceRepository;
 	public void addFile(Resource resource, MultipartFile content) throws IOException {
@@ -20,7 +25,8 @@ public class ResourceManagementService {
 		if(resource.getName() == null || resource.getName().equals("")){
 			resource.setName(content.getOriginalFilename());
 		}
-		resourceRepository.add(resource, content.getInputStream());
+		User user = userRepository.get(SecurityContextHolder.getContext().getAuthentication().getName());
+		resourceRepository.addFile(resource, content.getInputStream().readAllBytes(), user);
 		System.out.println(content.getOriginalFilename());
 	}
 
