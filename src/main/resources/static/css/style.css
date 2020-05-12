@@ -158,6 +158,22 @@ div.success {
     z-index: 1;
 }
 
+
+textarea, input{
+    resize: none;
+    background: #555;
+    padding: 1px;
+    border: none;
+    color: white;
+    font-size: 1em;
+    box-shadow:  0px 2px 5px 0px #000;
+    margin: 0.3em 0;
+}
+
+button{
+    font-size: 1em;
+}
+
 .toggler {
     position: absolute;
     top: 0;

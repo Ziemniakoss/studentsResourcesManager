@@ -6,6 +6,7 @@ public class Resource {
 	private User owner;
 	private ResourceType type;
 	private boolean availableToAll;
+	private String description;
 
 	public boolean isAvailableToAll() {
 		return availableToAll;
@@ -45,5 +46,25 @@ public class Resource {
 
 	public void setType(ResourceType type) {
 		this.type = type;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Resource{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", owner=" + owner +
+				", type=" + type +
+				", availableToAll=" + availableToAll +
+				", description='" + description + '\'' +
+				'}';
 	}
 }
