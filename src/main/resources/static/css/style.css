@@ -1,208 +1,247 @@
 :root {
-	--header-color: rgb(52, 52, 52);
-	--overlay-color: rgba(29, 29, 29, 0.85);
-	--menu-speed: 0.15s;
+    --header-color: rgb(52, 52, 52);
+    --overlay-color: rgba(29, 29, 29, 0.85);
+    --menu-speed: 0.15s;
 }
 
 h1 {
-	width: 80%;
-	text-align: center;
-	margin: 0 auto;
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+a {
+    color: white;
+}
+
+table {
+    width: 100%;
+    border-spacing: 8px 5px;
+    margin: auto
+}
+
+thead tr {
+    font-size: 22px;
+    background: #666;
+    font-weight: bold;
+}
+
+tbody tr td{
+    padding: 0 8px;
+}
+
+tbody tr:nth-child(odd) {
+    background: #555;
+}
+
+thead tr th {
+    padding: 5px;
+}
+
+.table-buttons {
+    display: flex;
+}
+
+.table-buttons > form {
+    padding: 5px;
 }
 
 header {
-	background-color: var(--header-color);
-	width: 100vw;
-	height: 64px;
-	margin-top: -8px;
-	margin-left: 0;
-	margin-right: 0;
-	padding: 0;
-	display: flex;
+    background-color: var(--header-color);
+    width: 100vw;
+    height: 64px;
+    margin-top: -8px;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    display: flex;
 }
 
 body {
-	background-color: #202020;
-	color: #cccccc;
-	font-size: 18px;
+    background-color: #202020;
+    color: #cccccc;
+    font-size: 18px;
 }
 
 footer {
-	position: fixed;
-	width: 90%;
-	bottom: 0;
+    position: fixed;
+    width: 90%;
+    bottom: 0;
 
-	margin: auto;
+    margin: auto;
 }
 
-#error-messages{
-	display: flex;
+#error-messages {
+    display: flex;
 }
+
 ul.error {
-	list-style-type: none;
-	margin: 0 auto;
+    list-style-type: none;
+    margin: 0 auto;
 }
 
-li.error{
-	background-color: darkred;
-	color: #232323;
-	padding: 5px;
-	margin: 5px;
-	border-radius: 10px;
+li.error {
+    background-color: darkred;
+    color: #232323;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
 }
+
 .success {
-	background-color: rgb(7, 51, 6);
-	color: white;
-	margin: auto;
-	padding: 10px
+    background-color: rgb(7, 51, 6);
+    color: white;
+    margin: auto;
+    padding: 10px
 }
 
 div.success {
-	text-align: center;
+    text-align: center;
 }
+
 .contact {
-	background-color: darkred;
-	color: pink;
+    background-color: darkred;
+    color: pink;
 }
 
 .container {
-	background-color: #404040;
-	color: white;
-	margin: 20px;
-	padding: 20px;
+    background-color: #404040;
+    color: white;
+    margin: 20px;
+    padding: 20px;
 }
 
 .with-shaddow {
-	box-shadow: 0px 6px 7px 6px #111;
+    box-shadow: 0px 6px 7px 6px #111;
 }
 
 /**
  * Hamburger menu
  */
 .menu-wrap {
-	z-index: 1;
+    z-index: 1;
 }
 
 .toggler {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 2;
-	margin: 0;
-	padding: 0;
-	cursor: pointer;
-	width: 60px;
-	height: 60px;
-	opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    opacity: 0;
 }
 
 .hamburger {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	width: 30px;
-	height: 30px;
-	padding: 1rem;
-	background: var(--header-color);
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    padding: 1rem;
+    background: var(--header-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Hamburger Line */
 .hamburger > div {
-	position: relative;
-	flex: none;
-	width: 100%;
-	height: 2px;
-	background: #FFF;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: all 0.4s ease;
+    position: relative;
+    flex: none;
+    width: 100%;
+    height: 2px;
+    background: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
 }
 
 /* Hamburger Lines - Top & Bottom */
 .hamburger > div::before,
 .hamburger > div::after {
-	content: '';
-	position: absolute;
-	z-index: 1;
-	top: -10px;
-	width: 100%;
-	height: 2px;
-	background: inherit;
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    width: 100%;
+    height: 2px;
+    background: inherit;
 }
 
 /* Moves Line Down */
 .hamburger > div::after {
-	top: 10px;
+    top: 10px;
 }
 
 /* Toggler Animation */
 .toggler:checked + .hamburger > div {
-	transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 /* Turns Lines Into X */
 .toggler:checked + .hamburger > div:before,
 .toggler:checked + .hamburger > div:after {
-	top: 0;
-	transform: rotate(90deg);
+    top: 0;
+    transform: rotate(90deg);
 }
 
 /* Show Menu */
 .toggler:checked ~ .menu {
-	visibility: visible;
+    visibility: visible;
 }
 
 .toggler:checked ~ .menu > div {
-	transform: scale(1);
-	transition-duration: var(--menu-speed);
+    transform: scale(1);
+    transition-duration: var(--menu-speed);
 }
 
 .toggler:checked ~ .menu > div > div {
-	opacity: 1;
-	transition: opacity 0.4s ease 0.4s;
+    opacity: 1;
+    transition: opacity 0.4s ease 0.4s;
 }
 
 .menu {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	visibility: hidden;
-	overflow: hidden;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu > div {
-	background: var(--overlay-color);
-	border-radius: 50%;
-	width: 200vw;
-	height: 200vw;
-	display: flex;
-	flex: none;
-	align-items: center;
-	justify-content: center;
-	transform: scale(0);
-	transition: all 0.4s ease;
+    background: var(--overlay-color);
+    border-radius: 50%;
+    width: 200vw;
+    height: 200vw;
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+    transition: all 0.4s ease;
 }
 
 
 .menu-wrap .menu > div > ul > li {
-	list-style: none;
-	color: #fff;
-	font-size: 1.5rem;
-	padding: 1rem;
+    list-style: none;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 1rem;
 }
 
 .menu-wrap .menu > div > ul > li > a {
-	color: inherit;
-	text-decoration: none;
-	transition: color 0.2s ease;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }

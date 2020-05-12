@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/style.css">
+	<title>Dodaj nowy kurs</title>
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<section class="container with-shaddow">
+		<h1>Utwórz nowy kurs</h1>
+		<form th:object="${course}" method="post" action="/res-admin/courses/add">
+			<section id="course-data">
+				<label for="course-name">Nazwa</label>
+				<input name="name" type="text" maxlength="200" required id="course-name">
+				<div th:object="${user}">
+					<label for="coordinator-id">Prowadzący</label>
+					<select name="id" id="coordinator-id" required>
+						<option value=""  selected hidden>...</option>
+						<option th:each="emp : ${employees}" th:value="${emp.id}"
+								th:text="${emp.getName() + '('+emp.getEmail()+')'}"></option>
+					</select>
+				</div>
+				<label for="course-description">Opis kursu</label>
+				<input type="text" name="description" id="course-description">
+			</section>
+			<section id="buttons">
+				<a class="cancel-button" href="/res-admin">
+					<div> Anuluj</div>
+				</a>
+				<input type="submit" value="Utwórz">
+			</section>
+		</form>
+	</section>
+</main>
+</body>
+</html>

@@ -584,7 +584,11 @@ $$;
 
 ALTER FUNCTION create_class(INTEGER, EMAIL, CHAR) OWNER TO postgres;
 
-
+CREATE TABLE student_classes(
+                                student_id INTEGER NOT NULL REFERENCES students(id),
+                                class_id INTEGER NOT NULL REFERENCES classes(id),
+                                PRIMARY KEY (student_id,class_id)
+);
 
 INSERT INTO users (name, email, password_hash, id) VALUES ('Admin', 'admin@pw.edu.pl', '$2a$12$dP6HIH8AI01y4wPE9eGfVOBXa9tjVoOuGBPkYDITiVwpQjrwkbZou', 19);
 INSERT INTO admins (id) VALUES (19);

@@ -1,14 +1,15 @@
-package pl.ziemniakoss.studentsresourcesmanager.repositories;
+package pl.ziemniakoss.studentsresourcesmanager.repositories.users;
 
 
 import pl.ziemniakoss.studentsresourcesmanager.models.User;
+import pl.ziemniakoss.studentsresourcesmanager.repositories.userdetails.IUserDetailsRepository;
 
 import java.util.List;
 
 /**
  * Repozytorium użytkowników tylko do odczytu. Pozwala na przeszukiwanie listy użytkowników
  * bez koniecznośći wyczytywania ich ról i haseł. Do modyfikacji faktycznych użytkowników
- * należy użyć {@link pl.ziemniakoss.studentsresourcesmanager.repositories.IUserDetailsRepository}
+ * należy użyć {@link IUserDetailsRepository}
  */
 public interface IUserRepository {
 

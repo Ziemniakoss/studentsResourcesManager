@@ -1,9 +1,9 @@
-package pl.ziemniakoss.studentsresourcesmanager.services;
+package pl.ziemniakoss.studentsresourcesmanager.services.users;
 
 import org.springframework.stereotype.Service;
 import pl.ziemniakoss.studentsresourcesmanager.models.User;
 import pl.ziemniakoss.studentsresourcesmanager.models.UserSearch;
-import pl.ziemniakoss.studentsresourcesmanager.repositories.IUserRepository;
+import pl.ziemniakoss.studentsresourcesmanager.repositories.users.IUserRepository;
 
 import java.util.List;
 

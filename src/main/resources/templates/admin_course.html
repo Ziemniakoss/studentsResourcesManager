@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:if="${course != null}" th:title="${course.getName()}"></title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<section id="course-data" class="container with-shaddow">
+		<h1 th:text="${course.getName()}"></h1>
+		<table>
+			<tbody>
+			<tr>
+				<td>Prowadzący</td>
+				<td>
+					<a href="#"
+					   th:text="${course.getCoordinator().getName()+'('+course.getCoordinator().getEmail()+')'}">
+						<!--						TODO faktyczny link-->
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td>Opis</td>
+				<td th:text="${course.getDescription()}"></td>
+			</tr>
+			<tr>
+				<td>Łącznie klas</td>
+				<td th:text="${classList.size()}"></td>
+			</tr>
+			</tbody>
+		</table>
+		<section id="buttons">
+			<form th:action="${'/res-admin/courses/'+course.getId()+'/classes/add'}" class="blue-button">
+				<button>Utwórz nową klasę</button>
+			</form>
+			<form th:action="${'/res-admin/courses/'+course.getId()+'/edit'}" class="blue-button">
+				<button>Edytuj dane kursu</button>
+			</form>
+			<form th:action="${'/res-admin/courses/'+course.getId()+'/delete'}" class="red-button">
+				<button>Usuń kurs</button>
+			</form>
+		</section>
+	</section>
+	<section id="classes-list" class="container with-shaddow">
+		<h2>Powiązane klasy</h2>
+		<table>
+			<thead>
+			<tr>
+				<th>Semestr</th>
+				<th>Prowadzący</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="class : ${classList}">
+				<td th:text="${class.getSemester()}"></td>
+				<td>
+					<a href="#" th:text="${class.getCoordinator().getName()+'('+class.getCoordinator().getEmail()+')'}">
+						<!--						TODO faktyczny link-->
+					</a>
+				</td>
+				<td class="table-buttons">
+					<form class="blue-button" th:action="${'/res-admin/classes/' + class.getId()}">
+						<button>Szczegóły</button>
+					</form>
+					<form class="red-button" th:action="${'/res-admin/classes/' + class.getId()+'/delete'}">
+						<button>Usuń klasę</button>
+					</form>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</section>
+</main>
+</body>
+</html>

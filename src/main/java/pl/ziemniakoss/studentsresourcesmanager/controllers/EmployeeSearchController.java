@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import pl.ziemniakoss.studentsresourcesmanager.models.EmployeeSearch;
 import pl.ziemniakoss.studentsresourcesmanager.models.User;
-import pl.ziemniakoss.studentsresourcesmanager.repositories.IUserRepository;
+import pl.ziemniakoss.studentsresourcesmanager.repositories.users.IUserRepository;
 
 import java.util.Collection;
 
@@ -24,6 +24,6 @@ public class EmployeeSearchController {
 		model.addAttribute("EmployeeSearch", new EmployeeSearch());
 		Collection<User> employees = userRepository.getAll(search.getName(), false, true, false);
 		model.addAttribute("EmployeeList", employees);
-		return "employees_search";
+		return "employees-search";
 	}
 }

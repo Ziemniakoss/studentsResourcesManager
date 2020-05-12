@@ -1,11 +1,10 @@
-package pl.ziemniakoss.studentsresourcesmanager.repositories;
+package pl.ziemniakoss.studentsresourcesmanager.repositories.userdetails;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Repository;
@@ -40,7 +39,7 @@ public class UserDetailsRepository implements IUserDetailsRepository {
 	public CustomUserDetails getByEmail(String email) {
 		ExecutorService threadPool = Executors.newCachedThreadPool();
 		System.out.println(email);
-		Future<CustomUserDetails> getUser = (Future<CustomUserDetails>) threadPool.submit(() -> {
+		Future<CustomUserDetails> getUser = threadPool.submit(() -> {
 			CustomUserDetails user = jdbcTemplate.query("SELECT * FROM users WHERE email = ?", new Object[]{email}, rs -> {
 						if (rs.next()) {
 							CustomUserDetails u = new CustomUserDetails();

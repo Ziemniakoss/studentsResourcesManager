@@ -1,4 +1,4 @@
-package pl.ziemniakoss.studentsresourcesmanager.repositories;
+package pl.ziemniakoss.studentsresourcesmanager.repositories.userdetails;
 
 import pl.ziemniakoss.studentsresourcesmanager.CustomUserDetails;
 
