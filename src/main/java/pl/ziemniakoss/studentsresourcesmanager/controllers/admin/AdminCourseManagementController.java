@@ -70,6 +70,9 @@ public class AdminCourseManagementController {
 	@GetMapping("/res-admin/courses/{id}")
 	public String showCourseInfo(Model model, @PathVariable int id){
 		Course c = courseRepository.get(id);
+		if(c == null){
+			return "error_404";
+		}
 		model.addAttribute("course", c);
 		model.addAttribute("classList", classesRepository.getAll(c));
 		return "admin_course";

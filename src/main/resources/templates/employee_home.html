@@ -10,9 +10,9 @@
 <header th:insert="header"></header>
 <main>
 	<h1>Strefa pracownika</h1>
-	<section id="courses" th:if="${courses != null && courses.size() > 0}">
-		<h2>Moje kursy i klasy</h2>
-		<table id="courses-table">
+	<section id="courses">
+		<h2>Moje kursy</h2>
+		<table id="courses-table" th:if="${courses != null && courses.size() > 0}">
 			<thead>
 			<tr>
 				<th>Nazwa</th>
@@ -23,9 +23,28 @@
 			<tr th:each="course : ${courses}"></tr>
 			</tbody>
 		</table>
+		<p th:if="${courses == null || courses.size == 0}">
+			Jeszcze nie prowadzisz żadnych kursów. Jeżeli prowadziszlub kurs
+			a go tutaj nie widzisz, zgłoś się do administratora.
+		</p>
 	</section>
 	<section id="classes">
 		<h2>Moje klasy</h2>
+		<table id="classes-table" th:if="${classes != null && classes.size() > 0}">
+			<thead>
+			<tr>
+				<th>Nazwa</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="class : ${classes}"></tr>
+			</tbody>
+		</table>
+		<p th:if="${classes == null || classes.size == 0}">
+			Jeszcze nie prowadzisz żadnych klas. Jeżeli prowadzisz klasę
+			a go tutaj nie widzisz, zgłoś się do administratora.
+		</p>
 	</section>
 </main>
 </body>

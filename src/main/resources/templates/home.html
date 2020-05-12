@@ -3,13 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Witaj</title>
+	<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h1>Wybierz panel zarządzania</h1>
-<ul>
-	<li><a href="/res-student/">Student</a> </li>
-	<li><a href="/res-admin/">Admin</a> </li>
-	<li><a href="/res-employee/">Pracownik</a> </li>
-</ul>
+<header th:insert="header"></header>
+<main>
+	<h1>Wybierz panel zarządzania</h1>
+	<ul>
+		<li sec:authorize="hasRole('STUDENT')"><a href="/res-student/">Student</a></li>
+		<li sec:authorize="hasRole('ADMIN')"><a href="/res-admin/">Admin</a></li>
+		<li sec:authorize="hasRole('EMPLOYEE')"><a href="/res-employee/">Pracownik</a></li>
+	</ul>
+</main>
 </body>
 </html>
