@@ -1,11 +1,14 @@
 package pl.ziemniakoss.studentsresourcesmanager.services.courses;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import pl.ziemniakoss.studentsresourcesmanager.models.Course;
 import pl.ziemniakoss.studentsresourcesmanager.models.User;
 import pl.ziemniakoss.studentsresourcesmanager.repositories.courses.ICourseRepository;
 import pl.ziemniakoss.studentsresourcesmanager.repositories.users.IUserRepository;
+
+import java.util.List;
 
 @Service
 public class CourseManagerService implements ICourseManagementService {
@@ -23,6 +26,7 @@ public class CourseManagerService implements ICourseManagementService {
 	 *     <li>Kurs ma koordynatora i jest nim osoba będąca pracownikiem</li>
 	 *     <li>Kurs ma nazwę o długości od 3 do 200 znaków włącznie</li>
 	 * </ul>
+	 *
 	 * @param course kurs do utworzenia
 	 */
 	@Override
@@ -35,7 +39,7 @@ public class CourseManagerService implements ICourseManagementService {
 
 		User coordinator = userRepository.get(course.getCoordinator().getId());
 		Assert.notNull(coordinator, "koordynator nie istnieje");
-		Assert.isTrue(coordinator.isEmployee(),"koordynator musi być pracownikiem");
+		Assert.isTrue(coordinator.isEmployee(), "koordynator musi być pracownikiem");
 		course.setCoordinator(coordinator);
 		courseRepository.create(course);
 	}
@@ -48,5 +52,10 @@ public class CourseManagerService implements ICourseManagementService {
 	@Override
 	public void deleteCourse(Course course) {
 		//todo
+	}
+
+	@Override
+	public List<Course> getAllOwnedByCurrentUser() {
+		return courseRepository.getAllCoordinatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
 	}
 }

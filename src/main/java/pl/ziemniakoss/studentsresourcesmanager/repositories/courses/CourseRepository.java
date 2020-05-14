@@ -85,7 +85,7 @@ public class CourseRepository implements ICourseRepository {
 
 	@Override
 	public List<Course> getAllCoordinatedBy(String email) {
-		return jdbcTemplate.query(BASE_QUERY + " WHERE e_id = (SELECT id FROM users uu WHERE uu.email = ?)", new Object[]{email}, (rs, rn) -> map(rs));
+		return jdbcTemplate.query(BASE_QUERY + " WHERE e.id = (SELECT id FROM users uu WHERE uu.email = ?)", new Object[]{email}, (rs, rn) -> map(rs));
 	}
 
 	@Override

@@ -4,47 +4,43 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Witaj</title>
-	<link rel="stylesheet" th:href="@{css/style.css} ">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/employee_home.css">
 </head>
 <body>
 <header th:insert="header"></header>
 <main>
 	<h1>Strefa pracownika</h1>
-	<section id="courses">
-		<h2>Moje kursy</h2>
-		<table id="courses-table" th:if="${courses != null && courses.size() > 0}">
-			<thead>
-			<tr>
-				<th>Nazwa</th>
-				<th></th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr th:each="course : ${courses}"></tr>
-			</tbody>
-		</table>
-		<p th:if="${courses == null || courses.size == 0}">
-			Jeszcze nie prowadzisz żadnych kursów. Jeżeli prowadziszlub kurs
-			a go tutaj nie widzisz, zgłoś się do administratora.
-		</p>
-	</section>
-	<section id="classes">
-		<h2>Moje klasy</h2>
-		<table id="classes-table" th:if="${classes != null && classes.size() > 0}">
-			<thead>
-			<tr>
-				<th>Nazwa</th>
-				<th></th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr th:each="class : ${classes}"></tr>
-			</tbody>
-		</table>
-		<p th:if="${classes == null || classes.size == 0}">
-			Jeszcze nie prowadzisz żadnych klas. Jeżeli prowadzisz klasę
-			a go tutaj nie widzisz, zgłoś się do administratora.
-		</p>
+	<section id="main-menu">
+		<a href="/res-employee/courses" class="big-button">
+			<section class="big-button">
+				<h2>Moje kursy</h2>
+				<p>
+					Przejdz do panelu zarządzania swoimi kursami. Możesz w nim podpiąć zasób pod
+					kurs lub utworzyć nową grupę zasobóœ podpiętą pod kurs
+				</p>
+
+			</section>
+		</a>
+		<a href="/res-employee/classes" class="big-button">
+			<section class="big-button">
+				<h2>Moje klasy</h2>
+				<p>
+					Przejdz do panelu zarządzania swoimi klasami. Pozwala na podpięcie materiału pod klase
+					i przeglądanie już podpiętych grup zasobów i zasobów.
+				</p>
+			</section>
+		</a>
+		<a href="/res-employee/resources" class="big-button">
+			<section class="big-button">
+				<h2>Moje Zasoby</h2>
+				<p>
+					Przejdz do panelu zarządzania swoimi kursami. Możesz w nim podpiąć zasób pod
+					kurs lub utworzyć nową grupę zasobóœ podpiętą pod kurs
+				</p>
+			</section>
+		</a>
+
 	</section>
 </main>
 </body>
