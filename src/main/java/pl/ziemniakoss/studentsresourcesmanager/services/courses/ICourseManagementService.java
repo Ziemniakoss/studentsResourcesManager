@@ -13,4 +13,8 @@ public interface ICourseManagementService {
 	void deleteCourse(Course course);
 
 	List<Course> getAllOwnedByCurrentUser();
+
+	boolean hasAccess(Course course);
+
+	boolean hasAccess(int courseId);
 }

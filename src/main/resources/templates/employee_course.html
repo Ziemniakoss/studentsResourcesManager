@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${course.getName()}"></title>
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/employee_course.css">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<section id="course-data" class="container with-shaddow">
+		<h1>Dane kursu</h1>
+		<section id="course-data-table">
+			<div><b>Nazwa</b></div>
+			<div th:text="${course.getName()}"></div>
+
+			<div><b>Opis</b></div>
+			<div th:text="${course.getDescription()}"></div>
+		</section>
+	</section>
+	<section class="container with-shaddow">
+		<h2>Zasoby przedmiotu </h2>
+		<section id="buttons">
+			<form th:action="${'/res-employee/courses/' + course.getId() + '/resources/add-existing'}"
+				  title="Podłącz istniejący już w systemie zasób do kursu">
+				<button class="option-button">Podłącz istnijejący zasób</button>
+			</form>
+
+		</section>
+		<section th:if="${resources.size() == 0}">
+			<p>
+				Ten kurs nie ma jeszcze przypisanych żadnych materiałów. Możesz przypisać
+				materiały za pomocą przycisków powżej
+			</p>
+		</section>
+		<section id="resources-data" th:if="${resources.size() != 0}">
+			<table>
+				<thead>
+				<tr>
+					<th>Nazwa</th>
+					<th>Typ</th>
+					<th>Właściciel</th>
+					<th>Opis</th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="res : ${resources}">
+					<td th:text="${res.getName()}"></td>
+					<td th:text="${res.getType()}"></td>
+					<td>
+						<a th:text="${res.getOwner().getName()+'('+res.getOwner().getEmail()+')'}" href="#">
+							<!--TODO faktyczny link-->
+						</a>
+					</td>
+					<td th:text="${res.getDescription()}"></td>
+					<td>
+						<form th:action="${'/res-employee/courses/' + course.getId()+'/resources/'+res.getId()+'/remove'}" method="post">
+							<button class="red-button">Usuń z kursu</button>
+						</form>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</section>
+	</section>
+</main>
+</body>
+</html>

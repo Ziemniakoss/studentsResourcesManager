@@ -1,5 +1,7 @@
 package pl.ziemniakoss.studentsresourcesmanager.services.courses;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -57,5 +59,37 @@ public class CourseManagerService implements ICourseManagementService {
 	@Override
 	public List<Course> getAllOwnedByCurrentUser() {
 		return courseRepository.getAllCoordinatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
+	}
+
+	@Override
+	public boolean hasAccess(Course course) {
+		Assert.notNull(course, "Kurs nie może być nullem");
+		return hasAccess(course.getId());
+	}
+
+	@Override
+	public boolean hasAccess(int courseId) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return false;
+		}
+		Course course = courseRepository.get(courseId);
+		if(course == null){
+			return false;
+		}
+		boolean hasAccess = false;
+		for (GrantedAuthority a : auth.getAuthorities()) {
+			if ("ROLE_ADMIN".equals(a.getAuthority())) {
+				return true;
+			}
+			if ("ROLE_EMPLOYEE".equals(a.getAuthority())) {
+				if (course.getCoordinator().getEmail().equals(auth.getName()))
+					return true;
+			}
+			if("ROLE_STUDENT".equals(a.getAuthority())){
+				//todo
+			}
+		}
+		return hasAccess;
 	}
 }
