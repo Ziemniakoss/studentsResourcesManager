@@ -1,0 +1,16 @@
+#main-menu{
+	display: flex;
+	align-content: center;
+	width: 100%;
+
+}
+
+#main-menu a{
+	height: 100%;
+	width: 100%;
+}
+
+#main-menu a section{
+	height: 100%;
+}
+

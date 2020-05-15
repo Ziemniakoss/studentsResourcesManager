@@ -1,11 +1,16 @@
 package pl.ziemniakoss.studentsresourcesmanager.services.courses;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import pl.ziemniakoss.studentsresourcesmanager.models.Course;
 import pl.ziemniakoss.studentsresourcesmanager.models.User;
 import pl.ziemniakoss.studentsresourcesmanager.repositories.courses.ICourseRepository;
 import pl.ziemniakoss.studentsresourcesmanager.repositories.users.IUserRepository;
+
+import java.util.List;
 
 @Service
 public class CourseManagerService implements ICourseManagementService {
@@ -23,6 +28,7 @@ public class CourseManagerService implements ICourseManagementService {
 	 *     <li>Kurs ma koordynatora i jest nim osoba będąca pracownikiem</li>
 	 *     <li>Kurs ma nazwę o długości od 3 do 200 znaków włącznie</li>
 	 * </ul>
+	 *
 	 * @param course kurs do utworzenia
 	 */
 	@Override
@@ -35,7 +41,7 @@ public class CourseManagerService implements ICourseManagementService {
 
 		User coordinator = userRepository.get(course.getCoordinator().getId());
 		Assert.notNull(coordinator, "koordynator nie istnieje");
-		Assert.isTrue(coordinator.isEmployee(),"koordynator musi być pracownikiem");
+		Assert.isTrue(coordinator.isEmployee(), "koordynator musi być pracownikiem");
 		course.setCoordinator(coordinator);
 		courseRepository.create(course);
 	}
@@ -48,5 +54,42 @@ public class CourseManagerService implements ICourseManagementService {
 	@Override
 	public void deleteCourse(Course course) {
 		//todo
+	}
+
+	@Override
+	public List<Course> getAllOwnedByCurrentUser() {
+		return courseRepository.getAllCoordinatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
+	}
+
+	@Override
+	public boolean hasAccess(Course course) {
+		Assert.notNull(course, "Kurs nie może być nullem");
+		return hasAccess(course.getId());
+	}
+
+	@Override
+	public boolean hasAccess(int courseId) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return false;
+		}
+		Course course = courseRepository.get(courseId);
+		if(course == null){
+			return false;
+		}
+		boolean hasAccess = false;
+		for (GrantedAuthority a : auth.getAuthorities()) {
+			if ("ROLE_ADMIN".equals(a.getAuthority())) {
+				return true;
+			}
+			if ("ROLE_EMPLOYEE".equals(a.getAuthority())) {
+				if (course.getCoordinator().getEmail().equals(auth.getName()))
+					return true;
+			}
+			if("ROLE_STUDENT".equals(a.getAuthority())){
+				//todo
+			}
+		}
+		return hasAccess;
 	}
 }

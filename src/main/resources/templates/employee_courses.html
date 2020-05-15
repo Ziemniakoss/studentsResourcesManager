@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>Twoje kursy</title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<section class="container with-shaddow" th:if="${courses != null && courses.size() > 0}">
+		<h1> Twoje kursy</h1>
+		<table>
+			<thead>
+			<tr>
+				<th>Nazwa</th>
+				<th>Opis</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr th:each="course : ${courses}">
+					<td th:text="${course.getName()}"></td>
+					<td th:text="${course.getDescription()}"></td>
+					<td>
+						<form th:action="${'/res-employee/courses/' + course.getId()}">
+							<button class="option-button">Szczegóły</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	<section th:if="${courses == null}">
+		<h2>Nie prowadzisz żadnego kursu</h2>
+		<p>
+			Jeżeli uważasz, że prowadzisz kurs, a nie widzisz go tutaj zgłoś się do administratora
+		</p>
+	</section>
+</main>
+</body>
+</html>

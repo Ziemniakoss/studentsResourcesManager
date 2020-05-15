@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>Dodaj plik</title>
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/employee_resources-add-file.css">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<section class="container with-shaddow">
+		<h1>Dodaj nowy plik</h1>
+		<form th:object="${resource}" action="/res-employee/resources/add/file" method="post" id="resources-form" enctype="multipart/form-data">
+			<input type="file" required placeholder="Plik" name="file">
+			<section id="additional-info" class="container2">
+				<h3>Dodatkowe informacje</h3>
+				<label>Nazwa pliku:*</label>
+				<input type="text" id="file-name"
+					   title="Jeżeli pole zostanie uzupełnione, plik w bazie danych będzie miał inną nazwę niż orginalną."
+					   name="name" placeholder="Nazwa pliku(opcjonalne)">
+				<label>Opis:*</label>
+				<textarea placeholder="Opis pliku(opcjonalne)." name="description"
+						  title="Dodatkowe informacje o pliku. Może to być na przykład instrukcja uruchomienia dla programu."></textarea>
+				<div title="Zasoby publiczne może zobaczyć każdy, niepubliczne jedynie osoby zapisane do kursu lub klasy do której dany zasób jest podpięty"
+					 id="is-public-checkbox">
+					<label for="publicCheckbox">Dostępny publicznie?</label>
+					<input type="checkbox" name="availableToAll" checked id="publicCheckbox">
+				</div>
+				<section id="buttons">
+					<a href="/res-employee">
+						<button class="red-button" type="button">Anuluj</button>
+					</a>
+					<button type="submit" class="green-button">Dodaj plik</button>
+				</section>
+			</section>
+		</form>
+	</section>
+</main>
+</body>
+</html>

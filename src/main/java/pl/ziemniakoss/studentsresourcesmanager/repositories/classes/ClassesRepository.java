@@ -1,7 +1,9 @@
 package pl.ziemniakoss.studentsresourcesmanager.repositories.classes;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 import pl.ziemniakoss.studentsresourcesmanager.models.Class;
 import pl.ziemniakoss.studentsresourcesmanager.models.Course;
 import pl.ziemniakoss.studentsresourcesmanager.models.User;
@@ -9,6 +11,7 @@ import pl.ziemniakoss.studentsresourcesmanager.repositories.courses.ICourseRepos
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -29,7 +32,9 @@ public class ClassesRepository implements IClassesRepository {
 
 	@Override
 	public void add(Class c) {
+		Assert.notNull(c, "Klasa nie może być nullem");
 		//todo
+		jdbcTemplate.update("INSERT INTO classes (course, coordinator, semester) VALUES (?,?,?)", c.getCourse().getId(), c.getCoordinator().getId(), c.getSemester());
 	}
 
 	@Override
@@ -44,27 +49,50 @@ public class ClassesRepository implements IClassesRepository {
 
 	@Override
 	public Class get(int index) {
-		return jdbcTemplate.queryForObject(BASE_QUERY+" WHERE cl.id = ? ",
-				new Object[]{index},
-				(resultSet, i) -> {
-					if (resultSet.next()) {
+		try {
+			return jdbcTemplate.queryForObject(BASE_QUERY + " WHERE cl.id = ? ",
+					new Object[]{index},
+					(resultSet, i) -> {
 						Course course = courseRepository.get(resultSet.getInt("cl_course"));
 						Class c = map(resultSet);
 						c.setCourse(course);
 						return c;
-					}
-					return null;
-				});
+					});
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 	@Override
 	public List<Class> getAll(Course course) {
-		//TODO cache
+		if (course == null) {
+			return new ArrayList<>();
+		}
 		Course c = courseRepository.get(course.getId());
-		List<Class> classes = jdbcTemplate.query(BASE_QUERY+ " WHERE cl.course = ?",
-				new Object[]{course.getId()}, (rs,rn)->map(rs));
-		classes.forEach(e->e.setCourse(c));
+		List<Class> classes = jdbcTemplate.query(BASE_QUERY + " WHERE cl.course = ?",
+				new Object[]{course.getId()}, (rs, rn) -> map(rs));
+		classes.forEach(e -> e.setCourse(c));
 		return classes;
+	}
+
+	@Override
+	public List<Class> getAllCoordinatedBy(int coordinatorId) {
+		return jdbcTemplate.query(BASE_QUERY + " WHERE coordinator = ?;", new Object[]{coordinatorId}, (rs, rn) -> map(rs));
+	}
+
+	@Override
+	public List<Class> getAllCoordinatedBy(User coordinator) {
+		return coordinator == null ? new ArrayList<>(1) : getAllCoordinatedBy(coordinator.getId());
+	}
+
+	@Override
+	public List<Class> getAllAttendedBy(int userId) {
+		return null;//todo
+	}
+
+	@Override
+	public List<Class> getAllAttendedBy(User student) {
+		return null;//todo
 	}
 
 	private Class map(ResultSet rs) throws SQLException {

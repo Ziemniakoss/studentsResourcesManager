@@ -2,6 +2,7 @@ package pl.ziemniakoss.studentsresourcesmanager.repositories.courses;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
@@ -64,7 +65,12 @@ public class CourseRepository implements ICourseRepository {
 
 	@Override
 	public Course get(int id) {
-		return jdbcTemplate.queryForObject(BASE_QUERY + " WHERE c.id = ?", new Object[]{id},(rs,rn)->map(rs));
+		try {
+			return jdbcTemplate.queryForObject(BASE_QUERY + " WHERE c.id = ?", new Object[]{id},
+					(rs, rn) -> map(rs));
+		}catch (EmptyResultDataAccessException e){
+			return null;
+		}
 	}
 
 	@Override
@@ -79,7 +85,7 @@ public class CourseRepository implements ICourseRepository {
 
 	@Override
 	public List<Course> getAllCoordinatedBy(String email) {
-		return jdbcTemplate.query(BASE_QUERY + " WHERE e_id = (SELECT id FROM users uu WHERE uu.email = ?)", new Object[]{email}, (rs,rn)->map(rs));
+		return jdbcTemplate.query(BASE_QUERY + " WHERE e.id = (SELECT id FROM users uu WHERE uu.email = ?)", new Object[]{email}, (rs, rn) -> map(rs));
 	}
 
 	@Override

@@ -102,4 +102,15 @@ public class CustomUserDetails implements org.springframework.security.core.user
 	public boolean isEnabled() {
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "CustomUserDetails{" +
+				"id=" + id +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", name='" + name + '\'' +
+				", authorities=" + authorities +
+				'}';
+	}
 }

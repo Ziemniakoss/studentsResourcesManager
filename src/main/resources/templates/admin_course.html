@@ -2,7 +2,7 @@
 <html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title th:if="${course != null}" th:title="${course.getName()}"></title>
+	<title th:if="${course != null}" th:text="${course.getName()}"></title>
 	<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -32,24 +32,25 @@
 			</tbody>
 		</table>
 		<section id="buttons">
-			<form th:action="${'/res-admin/courses/'+course.getId()+'/classes/add'}" class="blue-button">
-				<button>Utwórz nową klasę</button>
+			<form th:action="${'/res-admin/courses/'+course.getId()+'/classes/add'}">
+				<button class="option-button">Utwórz nową klasę</button>
 			</form>
-			<form th:action="${'/res-admin/courses/'+course.getId()+'/edit'}" class="blue-button">
-				<button>Edytuj dane kursu</button>
+			<form th:action="${'/res-admin/courses/'+course.getId()+'/edit'}">
+				<button class="option-button">Edytuj dane kursu</button>
 			</form>
-			<form th:action="${'/res-admin/courses/'+course.getId()+'/delete'}" class="red-button">
-				<button>Usuń kurs</button>
+			<form th:action="${'/res-admin/courses/'+course.getId()+'/delete'}">
+				<button class="red-button">Usuń kurs</button>
 			</form>
 		</section>
 	</section>
-	<section id="classes-list" class="container with-shaddow">
+	<section id="classes-list" class="container with-shaddow" th:if="${classList != null && classList.size() > 0}">
 		<h2>Powiązane klasy</h2>
 		<table>
 			<thead>
 			<tr>
 				<th>Semestr</th>
 				<th>Prowadzący</th>
+				<th>Opcje</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -61,11 +62,14 @@
 					</a>
 				</td>
 				<td class="table-buttons">
-					<form class="blue-button" th:action="${'/res-admin/classes/' + class.getId()}">
-						<button>Szczegóły</button>
+					<form th:action="${'/res-admin/classes/' + class.getId()}">
+						<button class="option-button">Szczegóły</button>
 					</form>
-					<form class="red-button" th:action="${'/res-admin/classes/' + class.getId()+'/delete'}">
-						<button>Usuń klasę</button>
+					<form th:action="${'/res-admin/classes/' + class.getId() + '/students/add'}">
+						<button class="option-button">Dodaj uczniów</button>
+					</form>
+					<form th:action="${'/res-admin/classes/' + class.getId() + '/delete'}">
+						<button class="red-button">Usuń klasę</button>
 					</form>
 				</td>
 			</tr>

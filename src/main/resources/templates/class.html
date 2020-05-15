@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${class.getSemester()+ ' ' + class.getCourse().getName()}"></title>
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/class.css">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<section id="class-info" class="container with-shaddow">
+		<h1 th:text="${class.getSemester()+ ' ' + class.getCourse().getName()}"></h1>
+		<section id="class-info-data">
+			<div>Nazwa kursu</div>
+			<div th:text="${class.getCourse().getName()}"></div>
+
+			<div>Semestr</div>
+			<div th:text="${class.getSemester()}"></div>
+
+			<div>Prowadzący kurs</div>
+			<div>
+				<a th:text="${class.getCourse().getCoordinator().getName()}" href="#"></a>
+				<!--				TODO faktyczny link-->
+			</div>
+			<div>Prowadzący klasę</div>
+			<div>
+				<a th:text="${class.getCoordinator().getName()}" href="#"></a>
+				<!--				TODO faktyczny link-->
+			</div>
+		</section>
+		<section id="admin-options" sec:authorize="hasRole('ADMIN')">
+			<form th:action="${'/res-admin/classes/'+class.getId()+'/students'}">
+				<button class="option-button">Zarządzaj studentami</button>
+			</form>
+			<form th:action="${'/res-admin/classes/'+class.getId()+'/edit'}">
+				<button class="option-button">Edtyuj klasę</button>
+			</form>
+			<form th:action="${'/res-admin/classes/'+class.getId()+'/delete'}">
+				<button class="red-button">Usuń klasę</button>
+			</form>
+		</section>
+	</section>
+	<section id="class-files">
+
+	</section>
+</main>
+</body>
+</html>

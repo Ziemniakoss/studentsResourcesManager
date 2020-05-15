@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>Moje udostępnione zasoby</title>
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/employee_resources.css">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<section class="container with-shaddow">
+		<h1>Moje udostępnione zasoby</h1>
+		<section id="options-and-search">
+			<form id="search">
+				<input type="text" name="name" placeholder="Nazwa">
+				<button type="submit" class="option-button">Szukaj</button>
+				<button type="reset" class="red-button">Resetuj</button>
+			</form>
+			<section id="option-buttons">
+				<form action="/res-employee/resources/add">
+					<button class="option-button">Dodaj nowy</button>
+				</form>
+			</section>
+		</section>
+	</section>
+</main>
+
+</body>
+</html>
