@@ -1,8 +1,10 @@
 package pl.ziemniakoss.studentsresourcesmanager.repositories.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 import pl.ziemniakoss.studentsresourcesmanager.models.Resource;
 import pl.ziemniakoss.studentsresourcesmanager.models.ResourceType;
 import pl.ziemniakoss.studentsresourcesmanager.models.User;
@@ -19,12 +21,20 @@ public class ResourceRepository implements IResourceRepository {
 					" FROM resources r " +
 					" JOIN employees e ON e.id = r.owner " +
 					" JOIN users u ON e.id = u.id ";
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private final JdbcTemplate jdbcTemplate;
+
+	public ResourceRepository(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
 	@Override
 	public Resource get(int id) {
-		return null;//todo
+		try {
+			return jdbcTemplate.queryForObject(BASE_QUERY + " WHERE r.id = ?",
+					new Object[]{id}, (rs, rn) -> map(rs));
+		}catch (EmptyResultDataAccessException e){
+			return null;
+		}
 	}
 
 	@Override
@@ -55,16 +65,18 @@ public class ResourceRepository implements IResourceRepository {
 
 	@Override
 	public List<Resource> getAll() {
-		return jdbcTemplate.query(BASE_QUERY,(rs,rn)->map(rs));	}
-
-	@Override
-	public List<Resource> getAllOwnedBy(int userId) {//todo
-		return null;
+		return jdbcTemplate.query(BASE_QUERY, (rs, rn) -> map(rs));
 	}
 
 	@Override
-	public List<Resource> getAllOwnedBy(User user) {//todo
-		return null;
+	public List<Resource> getAllOwnedBy(int userId) {
+		return jdbcTemplate.query(BASE_QUERY +" WHERE owner = ?", (rs,rn)->map(rs), userId);
+	}
+
+	@Override
+	public List<Resource> getAllOwnedBy(User user) {
+		Assert.notNull(user, "Użytkownik  nie może być nullem");
+		return getAllOwnedBy(user.getId());
 	}
 
 	private Resource map(ResultSet rs) throws SQLException {

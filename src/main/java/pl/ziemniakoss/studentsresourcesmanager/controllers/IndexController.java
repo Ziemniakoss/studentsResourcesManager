@@ -18,19 +18,17 @@ public class IndexController {
 			return "redirect:/login";
 		}
 		List<? extends GrantedAuthority> roles = auth.getAuthorities().stream().filter(e -> e.getAuthority().startsWith("ROLE_")).collect(Collectors.toList());
-		if(roles.size() > 1){
+		if (roles.size() > 1) {
 			return "home";
 		}
-		switch (roles.get(0).getAuthority()){
+		switch (roles.get(0).getAuthority()) {
 			case "ROLE_ADMIN":
-				return "admin_home";
+				return "redirect:/res-admin";
 			case "ROLE_STUDENT":
-				return "student_home";
+				return "redirect:/res-student";
 			case "ROLE_EMPLOYEE":
-				return "employee_home";
+				return "redirect:/res-employee";
 		}
-
-
 		return "index";
 	}
 }

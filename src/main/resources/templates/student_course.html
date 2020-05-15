@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${course.getName()}"></title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<section>
+
+	</section>
+	<section class="container with-shaddow">
+		<h2>Materiały do kursu</h2>
+		<table th:if="${courseResources.size() > 0}">
+			<tr>
+				<th>Nazwa</th>
+				<th>Opis</th>
+				<th>Typ</th>
+				<th>Właściciel</th>
+				<th></th>
+			</tr>
+			<tr th:each="res : ${courseResources}">
+				<td th:text="${res.getName()}"></td>
+				<td th:text="${res.getDescription()}"></td>
+				<td th:text="${res.getType()}"></td>
+				<td th:text="${res.getOwner().getName()+'('+res.getOwner().email+')'}"></td>
+				<td>
+					<form th:action="${'/res-student/resource/' + res.getId()}">
+						<button class="option-button">Pobierz</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+		<p th:if="${courseResources.size() == 0}">
+			Nie podpięto materiałów
+		</p>
+
+	</section>
+	<section th:each="cl : ${classesResources.entrySet()}" class="container with-shaddow" >
+		<h2 th:text="${'Materiały do klasy '+ cl.getKey().getSemester()}"></h2>
+		<table th:if="${cl.getValue().size()>0}">
+			<tr>
+				<th>Nazwa</th>
+				<th>Opis</th>
+				<th>Typ</th>
+				<th>Właściciel</th>
+				<th></th>
+			</tr>
+			<tr th:each="res : ${cl.getValue()}">
+				<td th:text="${res.getName()}"></td>
+				<td th:text="${res.getDescription()}"></td>
+				<td th:text="${res.getType()}"></td>
+				<td th:text="${res.getOwner().getName()+'('+res.getOwner().email+')'}"></td>
+				<td>
+					<form th:action="${'/res-student/resource/' + res.getId()}">
+						<button class="option-button">Pobierz</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+		<p th:if="${cl.getValue().size() == 0}">
+			Nie podpięto materiałów
+		</p>
+
+	</section>
+</main>
+</body>
+</html>

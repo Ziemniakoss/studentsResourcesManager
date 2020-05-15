@@ -95,7 +95,8 @@ public class UserDetailsRepository implements IUserDetailsRepository {
 
 	@Override
 	public void add(CustomUserDetails userDetails) {
-		jdbcTemplate.update("INSERT INTO users (name, email, password_hash) VALUES (? ,?, ?);", userDetails.getName(), userDetails.getEmail(), userDetails.getPassword());
+		jdbcTemplate.update("INSERT INTO users (name, email, password_hash) VALUES (? ,?, ?);",
+				userDetails.getName(), userDetails.getEmail(), userDetails.getPassword());
 		updateRoles(userDetails);
 	}
 
