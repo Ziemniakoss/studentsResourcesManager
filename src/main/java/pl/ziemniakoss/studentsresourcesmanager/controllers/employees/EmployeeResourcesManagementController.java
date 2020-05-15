@@ -1,6 +1,7 @@
 package pl.ziemniakoss.studentsresourcesmanager.controllers.employees;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import pl.ziemniakoss.studentsresourcesmanager.models.Resource;
+import pl.ziemniakoss.studentsresourcesmanager.repositories.resources.IResourceRepository;
+import pl.ziemniakoss.studentsresourcesmanager.repositories.users.IUserRepository;
 import pl.ziemniakoss.studentsresourcesmanager.services.resources.ResourceManagementService;
 
 import java.io.IOException;
@@ -18,8 +21,13 @@ import java.rmi.server.ExportException;
 public class EmployeeResourcesManagementController {
 	@Autowired
 	private ResourceManagementService resourceManager;
+	@Autowired
+	private IResourceRepository resourceRepository;
+	@Autowired
+	private IUserRepository userRepository;
 	@GetMapping("/res-employee/resources")
-	public String showAllResources() {
+	public String showAllResources(Model model) {
+		model.addAttribute("resources", resourceRepository.getAllOwnedBy(userRepository.get(SecurityContextHolder.getContext().getAuthentication().getName())));
 		return "employee_resources";
 	}
 

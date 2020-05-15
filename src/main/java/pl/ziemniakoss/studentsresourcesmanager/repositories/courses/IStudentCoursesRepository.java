@@ -7,5 +7,10 @@ import java.util.List;
 
 public interface IStudentCoursesRepository {
 	List<Course> getAll(User student);
+
 	List<Course> getAll(int studentId);
+
+	boolean hasAccess(User student, Course course);
+
+	boolean hasAccess(int studentId, int courseId);
 }

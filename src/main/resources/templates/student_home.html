@@ -23,7 +23,17 @@
 			<tbody>
 			<tr th:each="course : ${courses}">
 				<td th:text="${course.getName()}"></td>
-				<td th:text="${course.getName()}"></td>
+				<td>
+					<a href="#"
+					   th:text="${course.getCoordinator().getName()+'('+course.getCoordinator().getEmail()+')'}">
+					</a>
+				</td>
+				<td th:text="${course.getDescription()}"></td>
+				<td>
+					<form th:action="${'/res-student/courses/' + course.getId()}">
+						<button class="option-button">Szczegóły</button>
+					</form>
+				</td>
 			</tr>
 			</tbody>
 		</table>

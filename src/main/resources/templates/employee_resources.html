@@ -24,8 +24,35 @@
 				</form>
 			</section>
 		</section>
+		<table th:if="${resources.size() > 0}">
+			<thead>
+			<tr>
+				<th>Nazwa</th>
+				<th>Opis</th>
+				<th>Typ</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="res : ${resources}">
+				<td th:text="${res.getName()}"></td>
+				<td th:text="${res.getDescription()}"></td>
+				<td th:text="${res.getType()}"></td>
+				<td>
+					<form th:action="${'/res-employee/resources/' + res.getId()}">
+						<button class="option-button">Szczegóły</button>
+					</form>
+					<form th:action="${'/res-employee/resources/' + res.getId() +'/delete'}">
+						<button class="red-button">Usuń</button>
+					</form>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<p th:if="${resources.size() == 0} ">
+			Nie masz jeszcze zasobów
+		</p>
 	</section>
 </main>
-
 </body>
 </html>
