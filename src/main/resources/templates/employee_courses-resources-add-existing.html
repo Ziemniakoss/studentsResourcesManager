@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>Wybierz zasób do podczepienia</title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<h1>Podczep zasób pod kurs</h1>
+	<section id="resource-search" class="container with-shaddow">
+		<form th:object="${query}" th:action="${'/res-employee/courses/'+ courseId +'/resources/add-existing'}">
+			<input type="text" name="name" placeholder="Nazwa zasobu">
+			<select name="ownerId">
+				<option th:each="emp : ${employees}" th:value="${emp.id}"
+						th:text="${emp.getName() + '('+emp.getEmail()+')'}"></option>
+			</select>
+			<button type="reset" class="red-button">Resetuj</button>
+			<button type="submit" class="option-button">Szukaj</button>
+		</form>
+	</section>
+	<section class="container with-shaddow">
+		<form th:object="${linkedResource}" method="post"
+			  th:action="${'/res-employee/courses/' + courseId+'/resources/add-existing'}">
+			<table>
+				<thead>
+				<tr>
+					<th></th>
+					<th>Nazwa</th>
+					<th>Typ</th>
+					<th>Opis</th>
+					<th>Właściciel</th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="r : ${resources}">
+					<td>
+						<input type="radio" name="id" required th:value="${r.getId()}">
+					</td>
+					<td th:text="${r.getName()}"></td>
+					<td th:text="${r.getType()}"></td>
+					<td th:text="${r.getDescription()}"></td>
+					<td th:text="${r.getOwner().getName() + '('+r.getOwner().getEmail()+')'}"></td>
+				</tr>
+				</tbody>
+			</table>
+			<button type="submit" class="green-button">Podłącz zasób</button>
+		</form>
+	</section>
+</main>
+</body>
+</html>
