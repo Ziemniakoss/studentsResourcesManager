@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>Stwórz nową klasę</title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header th:insert="header"></header>
+<main>
+	<section id="new-class-data">
+		<h1>Utwórz nową klasę do kurs</h1>
+		<form th:action="${'/res-admin/courses/' + courseId + '/classes/add'}" method="post">
+			<div id="wrapper">
+				<label for="semester">Semestr</label>
+				<select name="semester" id="semester" required>
+					<option value="2020Z">2020Z</option>
+					<option value="2020L">2020L</option>
+					<option value="2021Z">2021Z</option>
+					<option value="2021L">2021L</option>
+					<option value="2022Z">2022Z</option>
+					<option value="2022L">2022L</option>
+				</select>
+				<label></label>
+				<select id="coordinator" name="id" required>
+					<option value="" selected hidden>...</option>
+					<option th:each="emp : ${employees}" th:value="${emp.id}"
+							th:text="${emp.getName() + '('+emp.getEmail()+')'}"></option>
+				</select>
+			</div>
+			<button class="green-button">Stwórz kurs</button>
+		</form>
+	</section>
+
+</main>
+</body>
+</html>

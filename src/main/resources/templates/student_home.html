@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="UTF-8">
-	<title>Witaj studencie</title>
-	<link rel="stylesheet" href="css/style.css">
+	<title>Witaj</title>
+	<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <header th:insert="header"></header>
+<main>
+	<section class="container with-shaddow">
+		<h2>Twoje kursy</h2>
+		<table>
+			<thead>
+			<tr>
+				<th>Nazwa</th>
+				<th>Prowadzący</th>
+				<th>Opis</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="course : ${courses}">
+				<td th:text="${course.getName()}"></td>
+				<td th:text="${course.getName()}"></td>
+			</tr>
+			</tbody>
+		</table>
+	</section>
+</main>
 </body>
 </html>
